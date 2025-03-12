@@ -1,0 +1,16 @@
+[
+  {
+    "id": "936DA01F-9ABD-4d9d-80C7-02AF85C822A8",
+    "name": "Pizza Margherita",
+    "description": "Pomodoro, mozzarella, basilico",
+    "price": 10,
+    "image": "https://example.com/pizza-margherita.jpg"
+  },
+  {
+    "id": "10874987-12b2-4d51-897b-944917992931",
+    "name": "Pasta alla Carbonara",
+    "description": "Uova, guanciale, pecorino",
+    "price": 12,
+    "image": "https://example.com/pasta-carbonara.jpg"
+  }
+]
