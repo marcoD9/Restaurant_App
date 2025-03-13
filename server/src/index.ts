@@ -1,21 +1,12 @@
-import express, { Response } from "express";
-import { PrismaClient } from "@prisma/client";
-
+import express from "express";
+import usersRouter from "./routes/users.ts";
 const app = express();
-const prisma = new PrismaClient();
 
 app.use(express.json());
 
-app.get("/users", async (res: Response) => {
-  try {
-    const users = await prisma.user.findMany();
-    res.json(users);
-  } catch (error) {
-    res.status(500).json({ error: "Internal server error" });
-  }
-});
+app.use("/users", usersRouter);
 
-// Esegui il server
 app.listen(3000, () => {
   console.log("Server is running on http://localhost:3000");
 });
+app.use(express.json());
