@@ -34,25 +34,23 @@ model Dish {
 }
 
 model Order {
-  id             String      @id @default(uuid())
-  time           DateTime
-  totalPrice     Int
-  orderStatus    String
-  userId         String
-  user           User        @relation(fields: [userId], references: [id])
-  orderDishes    OrderDish[]
+  id          String    @id @default(uuid())
+  time        DateTime
+  totalPrice  Int
+  orderStatus String
+  userId      String
+  user        User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orderDishes OrderDish[]
 
   @@index([userId])
 }
-
 model OrderDish {
   orderId   String
   dishId    String
-  quantity  Int 
-  order     Order  @relation(fields: [orderId], references: [id])
-  dish      Dish   @relation(fields: [dishId], references: [id])
+  quantity  Int
+  order     Order  @relation(fields: [orderId], references: [id], onDelete: Cascade)
+  dish      Dish   @relation(fields: [dishId], references: [id], onDelete: Cascade)
 
   @@id([orderId, dishId])
 }
-
 
