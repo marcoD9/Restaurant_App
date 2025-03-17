@@ -8,7 +8,7 @@ import updateOrderDishesById from "../services/orderDishes.ts/updateOrderDishesB
 
 const router = Router();
 
-//GET all orderDishes
+//GET all Dishes from orders
 router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   try {
     console.log(req.params);
@@ -19,7 +19,7 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
     next(error);
   }
 });
-// GET orderDishes by Id
+// GET Dishes from orders by Id
 router.get(
   "/:orderId/dishes/:dishId",
   async (req: Request, res: Response, next: NextFunction) => {
@@ -53,7 +53,7 @@ router.post(
   }
 );
 
-//PUT to update dish by Id
+//PUT to update Dishes quantity by Id
 router.put(
   "/:orderId/dishes/:dishId",
   async (req: Request, res: Response, next: NextFunction) => {
@@ -79,7 +79,7 @@ router.put(
   }
 );
 
-//DELETE dish by Id
+//DELETE Dishes from an order
 router.delete(
   "/:orderId/dishes/:dishId",
   async (req: Request, res: Response, next: NextFunction) => {
