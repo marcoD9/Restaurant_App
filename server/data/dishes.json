@@ -12,5 +12,26 @@
     "description": "Uova, guanciale, pecorino",
     "price": 12,
     "image": "https://example.com/pasta-carbonara.jpg"
+  },
+  {
+    "id": "56874987-12b2-4d51-897b-944917992931",
+    "name": "Pasta Aglio e Olio",
+    "description": "Aglio, Olio",
+    "price": 8,
+    "image": "https://example.com/pasta.jpg"
+  },
+  {
+    "id": "45674987-12b2-4d51-897b-944917992931",
+    "name": "Tiramisù",
+    "description": "Uova, Mascarpone, Savoiardi, Cacao",
+    "price": 12,
+    "image": "https://example.com/tiramisù.jpg"
+  },
+  {
+    "id": "34789237-12b2-4d51-897b-944917992931",
+    "name": "Gnocchi",
+    "description": "Farina, Patate",
+    "price": 12,
+    "image": "https://example.com/gnocchi.jpg"
   }
 ]
