@@ -5,6 +5,7 @@ import createUser from "../services/users/createUser.ts";
 import updateUserById from "../services/users/updateUserById.ts";
 import deleteUserById from "../services/users/deleteUserById.ts";
 import validateFields from "../middlewares/validationMiddleware.ts";
+import authMiddleware from "../middlewares/auth.ts";
 
 const router = Router();
 
@@ -19,23 +20,28 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 // GET users by Id
-router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { id } = req.params;
-    const user = await getUserById(id);
-    if (!user) {
-      res.status(404).json({ message: `User with ${id} not found!` });
-    } else {
-      res.status(200).json(user);
+router.get(
+  "/:id",
+  authMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { id } = req.params;
+      const user = await getUserById(id);
+      if (!user) {
+        res.status(404).json({ message: `User with ${id} not found!` });
+      } else {
+        res.status(200).json(user);
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 // POST route to create a new user
 router.post(
   "/",
+  authMiddleware,
   validateFields(["username", "password", "name", "email", "phoneNumber"]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -55,35 +61,40 @@ router.post(
 );
 
 //PUT to update user by Id
-router.put("/:id", async (req: Request, res: Response, next: NextFunction) => {
-  try {
-    const { username, password, name, email, phoneNumber } = req.body;
-    const { id } = req.params;
+router.put(
+  "/:id",
+  authMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { username, password, name, email, phoneNumber } = req.body;
+      const { id } = req.params;
 
-    const user = await updateUserById(id, {
-      username,
-      password,
-      name,
-      email,
-      phoneNumber,
-    });
-    if (user) {
-      res
-        .status(200)
-        .send({ message: `User with id ${id} has been updated`, user });
-    } else {
-      res
-        .status(404)
-        .json({ message: `User with id ${id} has not been found` });
+      const user = await updateUserById(id, {
+        username,
+        password,
+        name,
+        email,
+        phoneNumber,
+      });
+      if (user) {
+        res
+          .status(200)
+          .send({ message: `User with id ${id} has been updated`, user });
+      } else {
+        res
+          .status(404)
+          .json({ message: `User with id ${id} has not been found` });
+      }
+    } catch (error) {
+      next(error);
     }
-  } catch (error) {
-    next(error);
   }
-});
+);
 
 //DELETE user by Id
 router.delete(
   "/:id",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { id } = req.params;

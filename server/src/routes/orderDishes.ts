@@ -5,6 +5,7 @@ import getOrderDishesById from "../services/orderDishes.ts/getOrderDishesById.ts
 import validateFields from "../middlewares/validationMiddleware.ts";
 import createOrderDishes from "../services/orderDishes.ts/createOrderDishes.ts";
 import updateOrderDishesById from "../services/orderDishes.ts/updateOrderDishesById.ts";
+import authMiddleware from "../middlewares/auth.ts";
 
 const router = Router();
 
@@ -22,6 +23,7 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
 // GET Dishes from orders by Id
 router.get(
   "/:orderId/dishes/:dishId",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { orderId, dishId } = req.params;
@@ -30,6 +32,7 @@ router.get(
         res.status(404).json({
           message: `Dish with id ${dishId} of Order ${orderId} not found`,
         });
+        return;
       }
       res.json(orderDishes);
     } catch (error) {
@@ -41,6 +44,7 @@ router.get(
 // POST route to create a new orderDishes
 router.post(
   "/",
+  authMiddleware,
   validateFields(["orderId", "dishId", "quantity"]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {
@@ -56,6 +60,7 @@ router.post(
 //PUT to update Dishes quantity by Id
 router.put(
   "/:orderId/dishes/:dishId",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { quantity } = req.body;
@@ -82,6 +87,7 @@ router.put(
 //DELETE Dishes from an order
 router.delete(
   "/:orderId/dishes/:dishId",
+  authMiddleware,
   async (req: Request, res: Response, next: NextFunction) => {
     try {
       const { orderId, dishId } = req.params;
