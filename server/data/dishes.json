@@ -4,34 +4,34 @@
     "name": "Pizza Margherita",
     "description": "Classic pizza with tomato sauce, mozzarella cheese, and fresh basil.",
     "price": 10,
-    "image": "https://www.giallozafferano.it/images/170-170/Pizza-Margherita_1500x1000.jpg"
+    "image": "https://cdn.pixabay.com/photo/2017/12/05/20/09/pizza-3000274_1280.jpg"
   },
   {
     "id": "10874987-12b2-4d51-897b-944917992931",
     "name": "Pasta alla Carbonara",
     "description": "Pasta with eggs, guanciale (cured pork cheek), pecorino cheese, and black pepper.",
     "price": 12,
-    "image": "https://www.giallozafferano.it/images/169-169/Spaghetti-alla-Carbonara_1500x1000.jpg"
+    "image": "https://cdn.pixabay.com/photo/2019/11/09/06/54/pasta-4612968_1280.jpg"
   },
   {
     "id": "56874987-12b2-4d51-897b-944917992931",
     "name": "Pasta Aglio e Olio",
     "description": "Spaghetti with garlic, olive oil, and chili flakes.",
     "price": 8,
-    "image": "https://www.giallozafferano.it/images/183-183/Spaghetti-aglio-olio-e-peperoncino_1500x1000.jpg"
+    "image": "https://media.istockphoto.com/id/1292175280/nl/foto/spaghetti-knoflook-olijfolie-en-chilipeper.jpg?s=1024x1024&w=is&k=20&c=_wA1C7KKoBfQQLNdg0P2SEt8pM4842oZM_YWd7LxcUA="
   },
   {
     "id": "45674987-12b2-4d51-897b-944917992931",
     "name": "Tiramisù",
     "description": "Italian dessert made with ladyfingers, mascarpone cheese, eggs, and cocoa.",
     "price": 12,
-    "image": "https://www.giallozafferano.it/images/168-168/Tiramisu_1500x1000.jpg"
+    "image": "https://cdn.pixabay.com/photo/2017/10/28/19/07/tiramisu-2897900_1280.jpg"
   },
   {
     "id": "34789237-12b2-4d51-897b-944917992931",
     "name": "Gnocchi",
     "description": "Potato dumplings served with your choice of sauce.",
     "price": 12,
-    "image": "https://www.giallozafferano.it/images/179-179/Gnocchi-di-patate_1500x1000.jpg"
+    "image": "https://media.istockphoto.com/id/894986620/nl/foto/gnocchi-met-parmezaanse-kaas.jpg?s=1024x1024&w=is&k=20&c=6WysQwcaCWMd-DtvqcJ6pm6pZ5EsOUg8B8scV1kIPjI="
   }
 ]
