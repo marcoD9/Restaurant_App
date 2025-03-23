@@ -20,23 +20,19 @@ router.get("/", async (req: Request, res: Response, next: NextFunction) => {
   }
 });
 // GET dishes by Id
-router.get(
-  "/:id",
-  authMiddleware,
-  async (req: Request, res: Response, next: NextFunction) => {
-    try {
-      const { id } = req.params;
-      const dish = await getDishById(id);
-      if (!dish) {
-        res.status(404).json({ message: `Dish with ${id} not found!` });
-      } else {
-        res.status(200).json(dish);
-      }
-    } catch (error) {
-      next(error);
+router.get("/:id", async (req: Request, res: Response, next: NextFunction) => {
+  try {
+    const { id } = req.params;
+    const dish = await getDishById(id);
+    if (!dish) {
+      res.status(404).json({ message: `Dish with ${id} not found!` });
+    } else {
+      res.status(200).json(dish);
     }
+  } catch (error) {
+    next(error);
   }
-);
+});
 
 // POST route to create a new dish
 router.post(
