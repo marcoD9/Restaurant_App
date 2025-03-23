@@ -3,12 +3,31 @@ import { User } from "./types";
 // Fetch Dish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
-    const dishResponse = await fetch("http://localhost:3000/dishes");
-    if (!dishResponse.ok) {
-      throw new Error(`HTTP error! status: ${dishResponse.status}`);
+    const response = await fetch("http://localhost:3000/dishes");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const dishData: Dish[] = await dishResponse.json();
-    return dishData;
+    const data: Dish[] = await response.json();
+    return data;
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error("An unknown error occurred.");
+    }
+  }
+};
+
+//Fetch Dish BY Id
+export const fetchDishById = async (id: string): Promise<Dish> => {
+  //Fetch the single dish
+  try {
+    const response = await fetch(`http://localhost:3000/dishes/${id}`);
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const data: Dish = await response.json();
+    return data;
   } catch (e: unknown) {
     if (e instanceof Error) {
       throw new Error(e.message);
@@ -21,12 +40,12 @@ export const fetchDish = async (): Promise<Dish[]> => {
 //Fetch User
 export const fetchUser = async (): Promise<User[]> => {
   try {
-    const userResponse = await fetch("http://localhost:3000/users");
-    if (!userResponse.ok) {
-      throw new Error(`HTTP error! status: ${userResponse.status}`);
+    const response = await fetch("http://localhost:3000/users");
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
     }
-    const userData: User[] = await userResponse.json();
-    return userData;
+    const data: User[] = await response.json();
+    return data;
   } catch (e: unknown) {
     if (e instanceof Error) {
       throw new Error(e.message);
