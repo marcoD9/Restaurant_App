@@ -1,4 +1,5 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "react-router-dom";
 import { Box, Heading, Flex, Text } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import UserCard from "../components/UserCard.tsx";
@@ -60,7 +61,9 @@ const Home: React.FC = () => {
         </Heading>
         <Flex className="flex-row flex-wrap justify-center gap-4 w-full">
           {dishes.map((dish) => (
-            <DishCard key={dish.id} dish={dish} />
+            <Link key={dish.id} to={`/dishes/${dish.id}`}>
+              <DishCard key={dish.id} dish={dish} />
+            </Link>
           ))}
         </Flex>
       </Box>
