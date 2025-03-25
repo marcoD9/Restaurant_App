@@ -1,6 +1,6 @@
-import { Dish } from "./types";
+import { Dish, LoginResponse } from "./types";
 import { User } from "./types";
-// Fetch Dish
+// GETDish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
     const response = await fetch("http://localhost:3000/dishes");
@@ -18,7 +18,7 @@ export const fetchDish = async (): Promise<Dish[]> => {
   }
 };
 
-//Fetch Dish BY Id
+// GET Dish BY Id
 export const fetchDishById = async (id: string): Promise<Dish> => {
   //Fetch the single dish
   try {
@@ -37,18 +37,57 @@ export const fetchDishById = async (id: string): Promise<Dish> => {
   }
 };
 
-//Fetch User
-export const fetchUser = async (): Promise<User[]> => {
+//GET User By Id
+export const fetchUserById = async (
+  id: string,
+  token: string
+): Promise<User> => {
   try {
-    const response = await fetch("http://localhost:3000/users");
-    if (!response.ok) {
-      throw new Error(`HTTP error! status: ${response.status}`);
+    const response = await fetch(`http://localhost:3000/users/${id}`, {
+      headers: {
+        Authorization: `Bearer ${token}`,
+      },
+    });
+    if (response.status === 404) {
+      throw new Error("User not found");
     }
-    const data: User[] = await response.json();
+    if (response.status === 500) {
+      throw new Error("Internal server error");
+    }
+    const data: User = await response.json();
     return data;
   } catch (e: unknown) {
     if (e instanceof Error) {
       throw new Error(e.message);
+    } else {
+      throw new Error("An unknown error occurred.");
+    }
+  }
+};
+
+//Login
+export const login = async (
+  username: string,
+  password: string
+): Promise<LoginResponse> => {
+  try {
+    const response = await fetch(`http://localhost:3000/login`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password }),
+    });
+
+    if (!response.ok) {
+      throw new Error("Login failed");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
     } else {
       throw new Error("An unknown error occurred.");
     }
