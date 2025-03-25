@@ -1,0 +1,11 @@
+@import "tailwindcss";
+
+@layer utilities {
+  .center-row {
+    @apply flex flex-row justify-center items-center gap-4;
+  }
+
+  .center-col {
+    @apply flex flex-col justify-center items-center gap-4 m-2;
+  }
+}
