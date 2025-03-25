@@ -24,9 +24,18 @@ router.post("/", async (req: Request, res: Response) => {
       res.status(400).json({ message: "Invalid credentials!" });
       return;
     }
-
     const token = jwt.sign({ userId: user.id }, secretKey);
-    res.status(200).json({ message: "Successfully logged in!", token });
+    res.status(200).json({
+      message: "Successfully logged in!",
+      token,
+      user: {
+        id: user.id,
+        username: user.username,
+        name: user.name,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      },
+    });
   } catch (error) {
     console.error("An error ha occurred:", error);
     res.status(500).json({ message: "An error ha occurred while logging in" });
