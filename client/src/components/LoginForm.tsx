@@ -1,12 +1,7 @@
 import React, { useState } from "react";
-import { login } from "../api";
-import { LoginResponse } from "@/types";
-import { Input, Button, VStack, Heading, Box } from "@chakra-ui/react";
-
-interface LoginFormProps {
-  onLoginSuccess: (userData: LoginResponse) => Promise<void>;
-  onError: (error: string) => void;
-}
+import { Input, Button, VStack, Box, Heading } from "@chakra-ui/react";
+import { LoginFormProps, LoginResponse } from "@/types";
+import { login } from "@/api";
 
 const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onError }) => {
   const [username, setUsername] = useState("");

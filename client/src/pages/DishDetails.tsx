@@ -2,13 +2,10 @@ import React, { useState, useEffect } from "react";
 import { Box, Flex } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import { fetchDishById } from "../api";
-import { Dish } from "../types";
+import { Dish, DishDetailsProps } from "../types";
 
 import { useParams } from "react-router-dom";
 
-interface DishDetailsProps {
-  id: string;
-}
 const DishDetails: React.FC<DishDetailsProps> = () => {
   const { id } = useParams(); // Get the dish ID from the URL parameters
   const [dish, setDish] = useState<Dish | null>(null);
