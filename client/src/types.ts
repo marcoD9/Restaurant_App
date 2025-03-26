@@ -31,6 +31,10 @@ export interface LoginResponse {
   token: string;
 }
 
+export interface UserLoginProps {
+  onClose: () => void;
+}
+
 export interface AuthProviderProps {
   children: ReactNode;
 }
