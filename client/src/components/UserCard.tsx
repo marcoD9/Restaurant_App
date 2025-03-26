@@ -9,7 +9,7 @@ function UserCard({ user }: UserCardProps) {
   return (
     <Box>
       <Stack>
-        <Text>User: {user.name}</Text>
+        <Text color="black">{user.name}</Text>
       </Stack>
     </Box>
   );
