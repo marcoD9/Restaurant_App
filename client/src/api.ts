@@ -1,6 +1,5 @@
-import { Dish, LoginResponse } from "./types";
-import { User } from "./types";
-// GETDish
+import { Dish, LoginResponse, User } from "./types";
+// GET Dish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
     const response = await fetch("http://localhost:3000/dishes");
@@ -92,4 +91,10 @@ export const login = async (
       throw new Error("An unknown error occurred.");
     }
   }
+};
+
+//Logout
+export const logout = () => {
+  // Remove the token from localStorage
+  localStorage.removeItem("authToken");
 };
