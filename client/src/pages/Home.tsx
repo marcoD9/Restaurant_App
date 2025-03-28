@@ -30,21 +30,24 @@ const Home: React.FC = () => {
 
   return (
     <div>
-      {error && <Text color="red">{error}</Text>}
-
+      <Text>{error}</Text>
       <Box className="center-col">
-        <Heading
-          className="text-4xl text-black font-bold mb-8"
-          as="h1"
-          size="2xl"
-        >
+        <Heading className="text-color-primary font-bold" as="h1" size="2xl">
           Restaurant
         </Heading>
         {/*Dish*/}
         <Flex className="center-col">
           {dishes.map((dish) => (
             <Link key={dish.id} to={`/dishes/${dish.id}`}>
-              <DishCard key={dish.id} dish={dish} />
+              <Box
+                key={dish.id}
+                _hover={{
+                  transform: "scale(1.03)",
+                  transition: "transform 0.2s ease-in-out",
+                }}
+              >
+                <DishCard dish={dish} />
+              </Box>
             </Link>
           ))}
         </Flex>
