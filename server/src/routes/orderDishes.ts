@@ -1,10 +1,10 @@
 import { Router, Request, Response, NextFunction } from "express";
-import getOrdersDishes from "../services/orderDishes.ts/getOrdersDishes.ts";
-import deleteOrderDishesById from "../services/orderDishes.ts/deleteOrderDishesById.ts";
-import getOrderDishesById from "../services/orderDishes.ts/getOrderDishesById.ts";
+import getOrdersDishes from "../services/orderDishes/getOrdersDishes.ts";
+import deleteOrderDishesById from "../services/orderDishes/deleteOrderDishesById.ts";
+import getOrderDishesById from "../services/orderDishes/getOrderDishesById.ts";
 import validateFields from "../middlewares/validationMiddleware.ts";
-import createOrderDishes from "../services/orderDishes.ts/createOrderDishes.ts";
-import updateOrderDishesById from "../services/orderDishes.ts/updateOrderDishesById.ts";
+import createOrderDishes from "../services/orderDishes/createOrderDishes.ts";
+import updateOrderDishesById from "../services/orderDishes/updateOrderDishesById.ts";
 import authMiddleware from "../middlewares/auth.ts";
 
 const router = Router();
