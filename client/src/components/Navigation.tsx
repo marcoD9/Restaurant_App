@@ -1,41 +1,60 @@
-import { useState } from "react";
-import { Box, Icon, Text, Flex } from "@chakra-ui/react";
-import { FaUser } from "react-icons/fa";
-import { useAuth } from "../AuthContext";
+import { useState, useRef, useEffect } from "react";
+import { Box, Button, Flex } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 import UserLogin from "./UserLogin";
 
 const Navigation = () => {
-  const [isClicked, setIsClicked] = useState(false);
-  const { user } = useAuth();
+  const [showAccountOptions, setShowAccountOptions] = useState(false);
+  const [showLogin, setShowLogin] = useState(false);
+  const navigate = useNavigate();
+  const accountButtonRef = useRef<HTMLButtonElement>(null);
+  const [dropdownPosition, setDropdownPosition] = useState({ top: 0, left: 0 });
+
+  useEffect(() => {
+    if (showAccountOptions && accountButtonRef.current) {
+      const rect = accountButtonRef.current.getBoundingClientRect();
+      setDropdownPosition({
+        top: rect.bottom + window.scrollY,
+        left: rect.left + window.scrollX - 200,
+      });
+    }
+  }, [showAccountOptions]);
 
   return (
-    <Box
-      bgColor={isClicked ? "gray.300" : "gray.200"}
-      p={4}
-      width={isClicked ? "auto" : "24"}
-      height="auto"
-      transition="all 0.3s ease-in-out"
-      display="flex"
-      alignItems="center"
-      justifyContent="center"
-      position="fixed"
-      right="1rem"
-      top="1rem"
-      borderRadius="md"
-      boxShadow="md"
-      zIndex={9999}
-    >
-      {isClicked ? (
-        <UserLogin onClose={() => setIsClicked(false)} />
-      ) : user ? (
-        <Flex align="center">
-          <Text mr={2} fontWeight="bold" color="black">
-            {user.name}
-          </Text>
-          <Icon as={FaUser} boxSize={6} onClick={() => setIsClicked(true)} />
-        </Flex>
-      ) : (
-        <Icon as={FaUser} boxSize={6} onClick={() => setIsClicked(true)} />
+    <Box w="100%" bg="gray.100" p={4} position="relative">
+      <Flex justifyContent="space-around" alignItems="center">
+        <Button
+          ref={accountButtonRef}
+          onClick={() => setShowAccountOptions(!showAccountOptions)}
+        >
+          Account
+        </Button>
+        <Button>Basket</Button>
+        <Button>Contacts</Button>
+      </Flex>
+      {showAccountOptions && (
+        <div
+          style={{
+            position: "absolute",
+            top: dropdownPosition.top,
+            left: dropdownPosition.left,
+            backgroundColor: "white",
+            padding: "1rem",
+            border: "1px solid #ccc",
+            boxShadow: "0 2px 4px rgba(0, 0, 0, 0.2)",
+            zIndex: 10,
+          }}
+        >
+          <Flex direction={"column"} alignItems="center">
+            <Flex justifyContent={"space-around"} width={"100%"}>
+              <Button onClick={() => setShowLogin(true)}>Login</Button>
+              <Button onClick={() => navigate("/create-account")}>
+                Create Account
+              </Button>
+            </Flex>
+            {showLogin && <UserLogin />}
+          </Flex>
+        </div>
       )}
     </Box>
   );
