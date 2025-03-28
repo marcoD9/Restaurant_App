@@ -1,32 +1,25 @@
 import React, { useState } from "react";
-import { Input, Button, VStack, Box, Heading } from "@chakra-ui/react";
-import { LoginFormProps, LoginResponse } from "@/types";
-import { login } from "@/api";
+import { Input, Button, VStack, Box } from "@chakra-ui/react";
+import { LoginResponse } from "@/types";
+import { useAuth } from "@/contexts/AuthContext";
 
-const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onError }) => {
+interface LoginFormProps {
+  onLoginSuccess: (userData: LoginResponse) => Promise<void>;
+  onError: (error: string) => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = () => {
+  const { login } = useAuth();
   const [username, setUsername] = useState("");
   const [password, setPassword] = useState("");
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
-
-    try {
-      const userData: LoginResponse = await login(username, password);
-      await onLoginSuccess(userData);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        onError(err.message);
-      } else {
-        onError("An unknown error occurred.");
-      }
-    }
+    await login(username, password); // Use login function from authContext to handle the login
   };
 
   return (
-    <Box p={8} borderWidth="1px" borderRadius="lg" width="400px">
-      <Heading mb={6} textAlign="center">
-        Login
-      </Heading>
+    <Box className="center-col" width="300px" padding="20px" borderRadius="8px">
       <form onSubmit={handleSubmit}>
         <VStack>
           <div>
@@ -40,7 +33,7 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onError }) => {
               type="text"
               id="username"
               placeholder="Username"
-              color="black"
+              className="text-color-primary"
               value={username}
               onChange={(e) => setUsername(e.target.value)}
             />
@@ -56,12 +49,12 @@ const LoginForm: React.FC<LoginFormProps> = ({ onLoginSuccess, onError }) => {
               type="password"
               id="password"
               placeholder="Password"
-              color="black"
+              className="text-color-primary"
               value={password}
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button colorScheme="blackAlpha" width="full" type="submit">
+          <Button className="text-color-primary" width="full" type="submit">
             Login
           </Button>
         </VStack>
