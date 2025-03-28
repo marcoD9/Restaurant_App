@@ -1,49 +1,48 @@
-import { Box, Button, Text } from "@chakra-ui/react";
+import { Box, Text, Button } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
-import { useAuth } from "../AuthContext";
-import { LoginResponse, UserLoginProps } from "@/types";
+import { useAuth } from "../contexts/AuthContext";
+import { LoginResponse } from "@/types";
 import { fetchUserById } from "@/api";
+import Toast from "./Toast.tsx";
 
-const UserLogin: React.FC<UserLoginProps> = ({ onClose }) => {
-  const { user, setUser, logout } = useAuth();
+const UserLogin = () => {
+  const { user, setUser, error, clearError, onError, logout } = useAuth();
 
   const handleLoginSuccess = async (userData: LoginResponse) => {
     try {
       const fetchedUser = await fetchUserById(userData.user.id, userData.token);
       setUser(fetchedUser);
-    } catch (error) {
-      console.error("Failed to fetch user data:", error);
+      clearError();
+    } catch (fetchError: unknown) {
+      console.error("Failed to fetch user data:", fetchError);
+      if (fetchError instanceof Error) {
+        onError(fetchError.message || "Failed to fetch user data.");
+      } else {
+        onError("Failed to fetch user data.");
+      }
     }
   };
 
   const handleLoginError = (errorMessage: string) => {
     console.error(errorMessage);
+    onError(errorMessage);
   };
 
   return (
     <>
-      <Box
-        display="flex"
-        justifyContent="space-between"
-        alignItems="center"
-        width="full"
-      >
-        <Button size="sm" onClick={onClose} ml={2}>
-          Close
-        </Button>
-        {user && (
-          <Button colorScheme="red" size="sm" onClick={logout} ml={2}>
-            Logout
-          </Button>
-        )}
-      </Box>
-      {user ? (
+      {error && (
+        <Toast key={error} type="error" message={error} onClose={clearError} />
+      )}
+
+      {user ? ( // If user is logged in, show user info and logout button
         <Box mt={4} textAlign="center">
           <Text fontWeight="bold" color="black">
-            {user.name}
+            Welcome {user.name}
           </Text>
+          <Button onClick={() => logout()}>Logout</Button>
         </Box>
       ) : (
+        // If user is not logged in, show the login form
         <Box mt={4}>
           <LoginForm
             onLoginSuccess={handleLoginSuccess}
