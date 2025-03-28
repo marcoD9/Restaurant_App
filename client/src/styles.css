@@ -1,11 +1,42 @@
 @import "tailwindcss";
 
+.bg-primary {
+  background-color: var(--color-yellow-100);
+}
+
+.bg-secondary {
+  background-color: var(--color-orange-400);
+}
+
+.text-color-primary {
+  color: var(--color-black);
+}
+
+.text-color-price {
+  color: var(--color-black);
+}
+
+.button-color-primary {
+  background-color: var(--color-orange-600);
+  color: var(--color-white);
+}
+.button-color-test {
+  background-color: var(--color-orange-100);
+  color: var(--color-white);
+}
+
 @layer utilities {
   .center-row {
-    @apply flex flex-row justify-center items-center gap-4;
+    @apply flex flex-row justify-center items-center text-center;
   }
 
   .center-col {
-    @apply flex flex-col justify-center items-center gap-4 m-2;
+    @apply flex flex-col justify-center items-center text-center;
+  }
+}
+
+@layer components {
+  .button {
+    @apply rounded-lg shadow-md p-2;
   }
 }
