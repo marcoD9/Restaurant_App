@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Button, Flex, Text } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import { fetchDishById } from "../api";
-import { Dish, DishDetailsProps } from "../types";
-
-import { useParams } from "react-router-dom";
-
+import { Dish } from "../types";
+import { Link, useParams } from "react-router-dom";
+interface DishDetailsProps {
+  id: string;
+}
 const DishDetails: React.FC<DishDetailsProps> = () => {
   const { id } = useParams(); // Get the dish ID from the URL parameters
   const [dish, setDish] = useState<Dish | null>(null);
@@ -38,6 +39,17 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
   return (
     <div>
       {/*Dish*/}
+      <Button
+        className="button-color-primary button"
+        _hover={{
+          bg: "orange.400",
+          color: "white",
+        }}
+      >
+        <Link to="/" aria-label="To the home page">
+          <Text fontSize="lg">Back</Text>
+        </Link>
+      </Button>
       <Box className="center-col">
         <Flex className="center-row">
           <DishCard key={dish.id} dish={dish} showDescription={true} />
