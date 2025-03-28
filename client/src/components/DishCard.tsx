@@ -9,21 +9,22 @@ interface DishCardProps {
 function DishCard({ dish, showDescription = false }: DishCardProps) {
   return (
     <Box
-      className=" bg-amber-100"
-      maxW="3xl"
-      borderWidth="1px"
-      borderRadius="lg"
-      overflow="hidden"
-      p={4}
+      m={8}
+      p={8}
+      className="bg-secondary center-col rounded-lg shadow-lg max-w-3xl"
     >
-      <Image src={dish.image} alt={dish.name} borderRadius="lg" />
+      <Image src={dish.image} alt={dish.name} />
       <Stack mt="6">
-        <Heading color="black" size="md">
+        <Heading className="text-color-primary" fontSize="2xl">
           {dish.name}
         </Heading>
-        {showDescription ? <Text color="black">{dish.description}</Text> : null}{" "}
+        {showDescription ? (
+          <Text className="text-color-primary" fontSize="m">
+            {dish.description}
+          </Text>
+        ) : null}{" "}
         {/*Render description only if the prop is true*/}
-        <Text color="blue.400" fontSize="2xl">
+        <Text className="text-color-price" fontSize="lg">
           {dish.price}€
         </Text>
       </Stack>
