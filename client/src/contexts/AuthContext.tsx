@@ -40,11 +40,39 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setError(null);
   };
 
+  // Fetch User
+  const fetchUserData = useCallback(async (token: string, userId: string) => {
+    try {
+      const userData = await fetchUserById(userId, token);
+      setUser(userData);
+    } catch (fetchError: unknown) {
+      if (fetchError instanceof Error) {
+        setError(fetchError.message);
+      } else {
+        setError("Failed to fetch user data.");
+      }
+    }
+  }, []);
+
+  useEffect(() => {
+    const storedToken = localStorage.getItem("authToken");
+    if (storedToken && user === null) {
+      // If token truthy and user null try to fetch user
+      const id = localStorage.getItem("userId");
+      if (id) {
+        fetchUserData(storedToken, id);
+      }
+    }
+  }, [fetchUserData, user]);
+
+  //login handler
   const loginHandler = async (username: string, password: string) => {
     try {
-      const userData: LoginResponse = await login(username, password);
-      setToken(userData.token);
-      localStorage.setItem("authToken", userData.token);
+      const response: LoginResponse = await login(username, password);
+      setToken(response.token);
+      localStorage.setItem("authToken", response.token);
+      localStorage.setItem("userId", response.user.id);
+      await fetchUserData(response.token, response.user.id);
     } catch (err: unknown) {
       if (err instanceof Error) {
         setError(err.message);
@@ -53,30 +81,6 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }
     }
   };
-
-  const fetchUserData = useCallback(
-    async (token: string) => {
-      if (token) {
-        try {
-          const userData = await fetchUserById(user?.id || "", token);
-          setUser(userData);
-        } catch (fetchError: unknown) {
-          if (fetchError instanceof Error) {
-            setError(fetchError.message);
-          } else {
-            setError("Failed to fetch user data.");
-          }
-        }
-      }
-    },
-    [user?.id]
-  );
-
-  useEffect(() => {
-    if (token) {
-      fetchUserData(token);
-    }
-  }, [token, fetchUserData]);
 
   const logoutHandler = () => {
     setUser(null);
