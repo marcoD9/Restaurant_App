@@ -47,12 +47,10 @@ export const fetchUserById = async (
         Authorization: `Bearer ${token}`,
       },
     });
-    if (response.status === 404) {
-      throw new Error("User not found");
+    if (!response.ok) {
+      throw new Error("Failed to fetch User");
     }
-    if (response.status === 500) {
-      throw new Error("Internal server error");
-    }
+
     const data: User = await response.json();
     return data;
   } catch (e: unknown) {
