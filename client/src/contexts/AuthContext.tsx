@@ -6,7 +6,7 @@ import React, {
   useCallback,
 } from "react";
 import { LoginResponse, User } from "@/types";
-import { login, fetchUserById, logout } from "../api.ts";
+import { login, fetchUserById, logout, createAccount } from "../api.ts";
 import { ReactNode } from "react";
 
 interface AuthProviderProps {
@@ -21,6 +21,13 @@ interface AuthContextType {
   onError: (message: string) => void;
   error: string | null;
   clearError: () => void;
+  createUser: (
+    username: string,
+    password: string,
+    name: string,
+    email: string,
+    phoneNumber: string
+  ) => Promise<void>;
 }
 
 const AuthContext = createContext<AuthContextType | undefined>(undefined);
@@ -73,9 +80,9 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem("authToken", response.token);
       localStorage.setItem("userId", response.user.id);
       await fetchUserData(response.token, response.user.id);
-    } catch (err: unknown) {
-      if (err instanceof Error) {
-        setError(err.message);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
       } else {
         setError("An unknown error occurred.");
       }
@@ -86,6 +93,32 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     setUser(null);
     setToken(null);
     logout();
+  };
+
+  // Create User
+  const createUser = async (
+    username: string,
+    password: string,
+    name: string,
+    email: string,
+    phoneNumber: string
+  ) => {
+    try {
+      const newUser = await createAccount(
+        username,
+        password,
+        name,
+        email,
+        phoneNumber
+      );
+      setUser(newUser);
+    } catch (error: unknown) {
+      if (error instanceof Error) {
+        setError(error.message);
+      } else {
+        setError("An unknwon error occurred.");
+      }
+    }
   };
 
   return (
@@ -99,6 +132,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         onError,
         error,
         clearError,
+        createUser,
       }}
     >
       {children}
