@@ -20,3 +20,12 @@ export interface LoginResponse {
   };
   token: string;
 }
+
+export interface NewUser {
+  id: string;
+  username: string;
+  password: string;
+  name: string;
+  email: string;
+  phoneNumber: string;
+}
