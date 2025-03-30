@@ -23,6 +23,7 @@ const Navigation = () => {
   return (
     <Box w="100%" bg="gray.100" p={4} position="relative">
       <Flex justifyContent="space-around" alignItems="center">
+        <Button onClick={() => navigate("/")}>Home</Button>
         <Button
           ref={accountButtonRef}
           onClick={() => setShowAccountOptions(!showAccountOptions)}
@@ -48,7 +49,7 @@ const Navigation = () => {
           <Flex direction={"column"} alignItems="center">
             <Flex justifyContent={"space-around"} width={"100%"}>
               <Button onClick={() => setShowLogin(true)}>Login</Button>
-              <Button onClick={() => navigate("/create-account")}>
+              <Button onClick={() => navigate("/register")}>
                 Create Account
               </Button>
             </Flex>
