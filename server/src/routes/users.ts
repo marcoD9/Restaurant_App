@@ -41,7 +41,6 @@ router.get(
 // POST route to create a new user
 router.post(
   "/",
-  authMiddleware,
   validateFields(["username", "password", "name", "email", "phoneNumber"]),
   async (req: Request, res: Response, next: NextFunction) => {
     try {

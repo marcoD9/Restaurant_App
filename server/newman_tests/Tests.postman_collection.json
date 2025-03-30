@@ -3701,42 +3701,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"// Reset the jwt_token collection variable before each request\r",
-											"pm.collectionVariables.unset(\"jwt_token\");\r",
-											"\r",
-											"// Get username and password from environment variables\r",
-											"const username = pm.environment.get('username');\r",
-											"const password = pm.environment.get('password');\r",
-											"\r",
-											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
-											"    console.log(\"Starting login request...\");\r",
-											"\r",
-											"    // Send the login request\r",
-											"    pm.sendRequest({\r",
-											"        url: pm.environment.get('baseUrl') + '/login',\r",
-											"        method: 'POST',\r",
-											"        header: { 'Content-Type': 'application/json' },\r",
-											"        body: {\r",
-											"            mode: 'raw',\r",
-											"            raw: JSON.stringify({ username, password })\r",
-											"        }\r",
-											"    }, function (err, res) {\r",
-											"        if (err) {\r",
-											"            console.error(\"Login failed:\", err);\r",
-											"            return;\r",
-											"        }\r",
-											"\r",
-											"        const token = res.json().token;\r",
-											"        if (token) {\r",
-											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
-											"            console.log(\"Login successful, token saved.\");\r",
-											"        } else {\r",
-											"            console.error(\"Login failed: token not found.\");\r",
-											"        }\r",
-											"    });\r",
-											"} else {\r",
-											"    console.log(\"Token already exists.\");\r",
-											"}"
+											""
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -4098,42 +4063,7 @@
 									"listen": "prerequest",
 									"script": {
 										"exec": [
-											"// Reset the jwt_token collection variable before each request\r",
-											"pm.collectionVariables.unset(\"jwt_token\");\r",
-											"\r",
-											"// Get username and password from environment variables\r",
-											"const username = pm.environment.get('username');\r",
-											"const password = pm.environment.get('password');\r",
-											"\r",
-											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
-											"    console.log(\"Starting login request...\");\r",
-											"\r",
-											"    // Send the login request\r",
-											"    pm.sendRequest({\r",
-											"        url: pm.environment.get('baseUrl') + '/login',\r",
-											"        method: 'POST',\r",
-											"        header: { 'Content-Type': 'application/json' },\r",
-											"        body: {\r",
-											"            mode: 'raw',\r",
-											"            raw: JSON.stringify({ username, password })\r",
-											"        }\r",
-											"    }, function (err, res) {\r",
-											"        if (err) {\r",
-											"            console.error(\"Login failed:\", err);\r",
-											"            return;\r",
-											"        }\r",
-											"\r",
-											"        const token = res.json().token;\r",
-											"        if (token) {\r",
-											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
-											"            console.log(\"Login successful, token saved.\");\r",
-											"        } else {\r",
-											"            console.error(\"Login failed: token not found.\");\r",
-											"        }\r",
-											"    });\r",
-											"} else {\r",
-											"    console.log(\"Token already exists.\");\r",
-											"}"
+											""
 										],
 										"type": "text/javascript",
 										"packages": {}
@@ -4559,104 +4489,6 @@
 									"path": [
 										"users",
 										"4c87c626-a500-4917-8225-b52a32c0ca7e"
-									]
-								}
-							},
-							"response": []
-						},
-						{
-							"name": "POST user 403",
-							"event": [
-								{
-									"listen": "test",
-									"script": {
-										"exec": [
-											"// Test for status code\r",
-											"pm.test(\"Status code is 403\", function () {\r",
-											"    pm.response.to.have.status(403);\r",
-											"});"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								},
-								{
-									"listen": "prerequest",
-									"script": {
-										"exec": [
-											"// Reset the jwt_token collection variable before each request\r",
-											"pm.collectionVariables.unset(\"jwt_token\");\r",
-											"\r",
-											"// Get username and password from environment variables\r",
-											"const username = pm.environment.get('wrong_username');\r",
-											"const password = pm.environment.get('wrong_password');\r",
-											"\r",
-											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
-											"    console.log(\"Starting login request...\");\r",
-											"\r",
-											"    // Send the login request\r",
-											"    pm.sendRequest({\r",
-											"        url: pm.environment.get('baseUrl') + '/login',\r",
-											"        method: 'POST',\r",
-											"        header: { 'Content-Type': 'application/json' },\r",
-											"        body: {\r",
-											"            mode: 'raw',\r",
-											"            raw: JSON.stringify({ username, password })\r",
-											"        }\r",
-											"    }, function (err, res) {\r",
-											"        if (err) {\r",
-											"            console.log(\"Login failed:\", err);\r",
-											"            return;\r",
-											"        }\r",
-											"\r",
-											"        const token = res.json().token;\r",
-											"        if (token) {\r",
-											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
-											"            console.log(\"Login successful, token saved.\");\r",
-											"        } else {\r",
-											"            console.log(\"Login failed: token not found.\");\r",
-											"        }\r",
-											"    });\r",
-											"} else {\r",
-											"    console.log(\"Token already exists.\");\r",
-											"}"
-										],
-										"type": "text/javascript",
-										"packages": {}
-									}
-								}
-							],
-							"protocolProfileBehavior": {
-								"disabledSystemHeaders": {}
-							},
-							"request": {
-								"auth": {
-									"type": "noauth"
-								},
-								"method": "POST",
-								"header": [
-									{
-										"key": "Authorization",
-										"value": "Bearer {{jwt_token}}",
-										"type": "text"
-									}
-								],
-								"body": {
-									"mode": "raw",
-									"raw": "{\r\n    \"username\": \"utenwwte.33C3rdde4a3to854e\",\r\n    \"password\": \"passwowwrd331333\",\r\n    \"name\": \"Mario Rossi\",\r\n    \"email\": \"mario.rossi@example.com\",\r\n    \"phoneNumber\": \"1234567890\"\r\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
-								},
-								"url": {
-									"raw": "{{baseUrl}}/users",
-									"host": [
-										"{{baseUrl}}"
-									],
-									"path": [
-										"users"
 									]
 								}
 							},
