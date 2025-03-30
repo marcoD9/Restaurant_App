@@ -1,4 +1,4 @@
-import { Dish, LoginResponse, User } from "./types";
+import { Dish, LoginResponse, NewUser, User } from "./types";
 // GET Dish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
@@ -95,4 +95,34 @@ export const login = async (
 export const logout = () => {
   // Remove the token from localStorage
   localStorage.removeItem("authToken");
+};
+
+//POST User
+export const createAccount = async (
+  username: string,
+  password: string,
+  name: string,
+  email: string,
+  phoneNumber: string
+): Promise<NewUser> => {
+  try {
+    const response = await fetch("http://localhost:3000/users", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ username, password, name, email, phoneNumber }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed creating user.");
+    }
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else {
+      throw new Error("An unknown error occurred.");
+    }
+  }
 };
