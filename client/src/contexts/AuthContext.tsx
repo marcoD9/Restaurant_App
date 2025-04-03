@@ -15,6 +15,7 @@ interface AuthProviderProps {
 interface AuthContextType {
   user: User | null;
   token: string | null;
+  fetchUserData: (token: string, userId: string) => Promise<void>;
   login: (username: string, password: string) => Promise<void>;
   logout: () => void;
   setUser: (user: User | null) => void;
@@ -133,6 +134,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         error,
         clearError,
         createUser,
+        fetchUserData,
       }}
     >
       {children}
