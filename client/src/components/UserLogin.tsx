@@ -2,16 +2,15 @@ import { Box, Text, Button } from "@chakra-ui/react";
 import LoginForm from "./LoginForm";
 import { useAuth } from "../contexts/AuthContext";
 import { LoginResponse } from "@/types";
-import { fetchUserById } from "@/api";
+
 import Toast from "./Toast.tsx";
 
 const UserLogin = () => {
-  const { user, setUser, error, clearError, onError, logout } = useAuth();
+  const { user, error, clearError, onError, logout, fetchUserData } = useAuth();
 
   const handleLoginSuccess = async (userData: LoginResponse) => {
     try {
-      const fetchedUser = await fetchUserById(userData.user.id, userData.token);
-      setUser(fetchedUser);
+      await fetchUserData(userData.user.id, userData.token);
       clearError();
     } catch (fetchError: unknown) {
       console.error("Failed to fetch user data:", fetchError);
