@@ -30,7 +30,7 @@ const Navigation = () => {
         >
           Account
         </Button>
-        <Button>Basket</Button>
+        <Button onClick={() => navigate("/checkout")}>Cart</Button>
         <Button>Contacts</Button>
       </Flex>
       {showAccountOptions && (

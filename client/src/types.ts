@@ -29,3 +29,12 @@ export interface NewUser {
   email: string;
   phoneNumber: string;
 }
+
+export interface Order {
+  id: string;
+  price: number;
+  time: Date;
+  orderStatus: string;
+  userId: string;
+  orderDishes: string;
+}

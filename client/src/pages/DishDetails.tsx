@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Box, Button, Flex, Text } from "@chakra-ui/react";
+import { Box, Flex } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import { fetchDishById } from "../api";
 import { Dish } from "../types";
-import { Link, useParams } from "react-router-dom";
+import { useParams } from "react-router-dom";
+import Cart from "@/components/Cart.tsx";
 interface DishDetailsProps {
   id: string;
 }
@@ -39,20 +40,10 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
   return (
     <div>
       {/*Dish*/}
-      <Button
-        className="button-color-primary button"
-        _hover={{
-          bg: "orange.400",
-          color: "white",
-        }}
-      >
-        <Link to="/" aria-label="To the home page">
-          <Text fontSize="lg">Back</Text>
-        </Link>
-      </Button>
       <Box className="center-col">
-        <Flex className="center-row">
+        <Flex className="center-col">
           <DishCard key={dish.id} dish={dish} showDescription={true} />
+          <Cart dishId={dish.id} />
         </Flex>
       </Box>
     </div>

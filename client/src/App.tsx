@@ -4,8 +4,7 @@ import Home from "./pages/Home.tsx";
 import DishDetails from "./pages/DishDetails.tsx";
 import { Root } from "./components/Root.tsx";
 import Register from "./pages/Register.tsx";
-//import About from './pages/About';
-//import Contact from './pages/Contact';
+import Checkout from "./pages/Checkout.tsx";
 
 function App() {
   return (
@@ -15,6 +14,7 @@ function App() {
           {" "}
           <Route index element={<Home />} />
           <Route path="/dishes/:id" element={<DishDetails id={""} />} />
+          <Route path="/checkout" element={<Checkout />} />
           <Route path="/register" element={<Register />} />
         </Route>
       </Routes>

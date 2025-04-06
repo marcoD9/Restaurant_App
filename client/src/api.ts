@@ -1,4 +1,4 @@
-import { Dish, LoginResponse, NewUser, User } from "./types";
+import { Dish, LoginResponse, NewUser, Order, User } from "./types";
 // GET Dish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
@@ -124,5 +124,40 @@ export const createAccount = async (
     } else {
       throw new Error("An unknown error occurred.");
     }
+  }
+};
+
+//POST Order
+export const createOrder = async (
+  token: string,
+  time: Date,
+  orderStatus: string,
+  userId: string,
+  orderDishes: string
+): Promise<Order> => {
+  try {
+    const response = await fetch("http://localhost:3000/orders", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Authorization: `Bearer ${token}`,
+      },
+      body: JSON.stringify({
+        time: time,
+        orderStatus: orderStatus || "Penfing", //Default value
+        userId: userId,
+        orderDishes: orderDishes,
+      }),
+    });
+    if (!response.ok) {
+      throw new Error("Failed creating order.");
+    }
+
+    const data = await response.json();
+    return data;
+  } catch (error: unknown) {
+    if (error instanceof Error) {
+      throw new Error(error.message);
+    } else throw new Error("An unknown error occurred.");
   }
 };
