@@ -1,12 +1,21 @@
 import React, { createContext, useState, useContext, useEffect } from "react";
 import { createOrder } from "../api";
 import { Order } from "../types";
+import CartToastManager from "@/components/CartToastManager";
 
-interface CartContextProps {
+interface CartContextType {
   cartItems: { dishId: string; quantity: number }[];
   addToCart: (dishId: string, quantity: number) => void;
   removeFromCart: (dishId: string) => void;
-  decreaseQuantity: (dishId: string) => void;
+  error: string | null;
+  success: string | null;
+  info: string | null;
+  setError: (message: string | null) => void;
+  setSuccess: (message: string | null) => void;
+  setInfo: (message: string | null) => void;
+  clearSuccess: () => void;
+  clearInfo: () => void;
+  clearError: () => void;
   clearCart: () => void;
   createOrderFromCart: (
     token: string,
@@ -15,17 +24,21 @@ interface CartContextProps {
   ) => Promise<Order | null>;
 }
 
-const CartContext = createContext<CartContextProps | undefined>(undefined);
+const CartContext = createContext<CartContextType | undefined>(undefined);
 
 export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
   children,
 }) => {
+  const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
   const [cartItems, setCartItems] = useState<
     { dishId: string; quantity: number }[]
   >(() => {
     const storedCartItems = localStorage.getItem("cartItems");
     return storedCartItems ? JSON.parse(storedCartItems) : [];
   });
+
   useEffect(() => {
     localStorage.setItem("cartItems", JSON.stringify(cartItems));
   }, [cartItems]);
@@ -43,27 +56,24 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         return [...prevItems, { dishId, quantity }];
       }
     });
+    setSuccess(`${quantity} items added to cart.`);
   };
 
   const removeFromCart = (dishId: string) => {
-    setCartItems((prevItems) =>
-      prevItems.filter((item) => item.dishId !== dishId)
-    );
-  };
-
-  const decreaseQuantity = (dishId: string) => {
     setCartItems((prevItems) => {
-      return prevItems.map((item) => {
-        if (item.dishId === dishId) {
-          return { ...item, quantity: Math.max(1, item.quantity - 1) };
-        }
-        return item;
-      });
+      const itemExists = prevItems.some((item) => item.dishId === dishId);
+      if (!itemExists) {
+        setError("Item not found in cart.");
+        return prevItems; // Prevent state update if item not found
+      }
+      setSuccess("Item removed from cart.");
+      return prevItems.filter((item) => item.dishId !== dishId);
     });
   };
 
   const clearCart = () => {
     setCartItems([]);
+    setSuccess("Cart cleared");
   };
 
   const createOrderFromCart = async (
@@ -81,30 +91,57 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
         orderDishes
       );
       clearCart();
+      setSuccess("Order successfully created!");
       return order;
     } catch (err) {
       console.error("Error creating order:", err);
+      setError("Error creating order. Please try again.");
       return null;
     }
   };
 
-  const value: CartContextProps = {
+  const clearError = () => {
+    setError(null);
+  };
+
+  const clearSuccess = () => {
+    setSuccess(null);
+  };
+
+  const clearInfo = () => {
+    setInfo(null);
+  };
+
+  const value: CartContextType = {
     cartItems,
     addToCart,
     removeFromCart,
-    decreaseQuantity,
     clearCart,
     createOrderFromCart,
+    error,
+    success,
+    info,
+    setError,
+    setSuccess,
+    setInfo,
+    clearSuccess,
+    clearInfo,
+    clearError,
   };
 
-  return <CartContext.Provider value={value}>{children}</CartContext.Provider>;
+  return (
+    <CartContext.Provider value={value}>
+      {children}
+      <CartToastManager />
+    </CartContext.Provider>
+  );
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const useCart = () => {
+export const useCart = (): CartContextType => {
   const context = useContext(CartContext);
-  if (context === undefined) {
-    throw new Error("useCart must be used within a CartProvider");
+  if (!context) {
+    throw new Error("useAuth must be used within an AuthProvider");
   }
   return context;
 };
