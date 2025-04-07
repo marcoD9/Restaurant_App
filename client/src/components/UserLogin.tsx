@@ -3,10 +3,8 @@ import LoginForm from "./LoginForm";
 import { useAuth } from "../contexts/AuthContext";
 import { LoginResponse } from "@/types";
 
-import Toast from "./Toast.tsx";
-
 const UserLogin = () => {
-  const { user, error, clearError, onError, logout, fetchUserData } = useAuth();
+  const { user, clearError, onError, logout, fetchUserData } = useAuth();
 
   const handleLoginSuccess = async (userData: LoginResponse) => {
     try {
@@ -29,11 +27,9 @@ const UserLogin = () => {
 
   return (
     <>
-      {error && (
-        <Toast key={error} type="error" message={error} onClose={clearError} />
-      )}
+      {user ? (
+        // If user is logged in, show user info and logout button
 
-      {user ? ( // If user is logged in, show user info and logout button
         <Box mt={4} textAlign="center">
           <Text fontWeight="bold" color="black">
             Welcome {user.name}
