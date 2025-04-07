@@ -8,6 +8,7 @@ import React, {
 import { LoginResponse, User } from "@/types";
 import { login, fetchUserById, logout, createAccount } from "../api.ts";
 import { ReactNode } from "react";
+import ToastManager from "@/components/ToastManager.tsx";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -21,6 +22,12 @@ interface AuthContextType {
   setUser: (user: User | null) => void;
   onError: (message: string) => void;
   error: string | null;
+  success: string | null;
+  info: string | null;
+  setSuccess: (message: string | null) => void;
+  setInfo: (message: string | null) => void;
+  clearSuccess: () => void;
+  clearInfo: () => void;
   clearError: () => void;
   createUser: (
     username: string,
@@ -38,6 +45,8 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
     localStorage.getItem("authToken")
   );
   const [error, setError] = useState<string | null>(null);
+  const [success, setSuccess] = useState<string | null>(null);
+  const [info, setInfo] = useState<string | null>(null);
 
   const onError = (message: string) => {
     setError(message);
@@ -46,6 +55,14 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
 
   const clearError = () => {
     setError(null);
+  };
+
+  const clearSuccess = () => {
+    setSuccess(null);
+  };
+
+  const clearInfo = () => {
+    setInfo(null);
   };
 
   // Fetch User
@@ -81,6 +98,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       localStorage.setItem("authToken", response.token);
       localStorage.setItem("userId", response.user.id);
       await fetchUserData(response.token, response.user.id);
+      setSuccess("Login successfully!");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
@@ -93,6 +111,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
   const logoutHandler = () => {
     setUser(null);
     setToken(null);
+    setSuccess("Logout!");
     logout();
   };
 
@@ -113,6 +132,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         phoneNumber
       );
       setUser(newUser);
+      setSuccess("User successfully created!");
     } catch (error: unknown) {
       if (error instanceof Error) {
         setError(error.message);
@@ -135,9 +155,16 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
         clearError,
         createUser,
         fetchUserData,
+        success,
+        info,
+        setSuccess,
+        setInfo,
+        clearSuccess,
+        clearInfo,
       }}
     >
       {children}
+      <ToastManager />
     </AuthContext.Provider>
   );
 };
