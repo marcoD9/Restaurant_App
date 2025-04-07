@@ -2,7 +2,7 @@ import { useEffect } from "react";
 import { toaster, Toaster } from "@/components/ui/toaster";
 import { useAuth } from "../contexts/AuthContext";
 
-const ToastManager = () => {
+const AuthToastManager = () => {
   const { error, success, info, clearError, clearSuccess, clearInfo } =
     useAuth();
 
@@ -45,4 +45,4 @@ const ToastManager = () => {
   return <Toaster />;
 };
 
-export default ToastManager;
+export default AuthToastManager;

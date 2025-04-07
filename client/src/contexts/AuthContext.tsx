@@ -8,7 +8,7 @@ import React, {
 import { LoginResponse, User } from "@/types";
 import { login, fetchUserById, logout, createAccount } from "../api.ts";
 import { ReactNode } from "react";
-import ToastManager from "@/components/ToastManager.tsx";
+import AuthToastManager from "@/components/AuthToastManager.tsx";
 
 interface AuthProviderProps {
   children: ReactNode;
@@ -164,7 +164,7 @@ export const AuthProvider: React.FC<AuthProviderProps> = ({ children }) => {
       }}
     >
       {children}
-      <ToastManager />
+      <AuthToastManager />
     </AuthContext.Provider>
   );
 };
