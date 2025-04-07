@@ -2,10 +2,19 @@ import React, { useState, useEffect } from "react";
 import { useCart } from "../contexts/CartContext";
 import { fetchDishById } from "../api";
 import { Dish } from "../types";
-import { Box, Heading, Text, Stack, Button, Flex } from "@chakra-ui/react";
+import {
+  Box,
+  Heading,
+  Text,
+  Stack,
+  Button,
+  Flex,
+  Image,
+} from "@chakra-ui/react";
 
 const Checkout: React.FC = () => {
-  const { cartItems, createOrderFromCart } = useCart();
+  const { cartItems, createOrderFromCart, removeFromCart, clearCart } =
+    useCart();
   const [dishDetails, setDishDetails] = useState<Dish[]>([]);
   const [totalPrice, setTotalPrice] = useState(0);
 
@@ -30,7 +39,12 @@ const Checkout: React.FC = () => {
       }
     };
 
-    fetchDishDetails();
+    if (cartItems.length > 0) {
+      fetchDishDetails();
+    } else {
+      setDishDetails([]);
+      setTotalPrice(0);
+    }
   }, [cartItems]);
 
   const handleCheckout = async () => {
@@ -48,6 +62,14 @@ const Checkout: React.FC = () => {
     }
   };
 
+  const handleRemoveItem = (dishId: string) => {
+    removeFromCart(dishId);
+  };
+
+  const handleClearCart = () => {
+    clearCart();
+  };
+
   return (
     <Flex direction="column" align="center" minH="100vh">
       <Box maxW="md" p={4}>
@@ -55,11 +77,15 @@ const Checkout: React.FC = () => {
         {dishDetails.length > 0 ? (
           <Stack>
             {dishDetails.map((dish, index) => (
-              <Box key={dish.id}>
+              <Flex key={dish.id} align="center">
+                <Image src={dish.image} alt={dish.name} boxSize="50px" mr={4} />
                 <Text color="black">
-                  {dish.name} - Quantity: {cartItems[index].quantity}
+                  {dish.name} - Quantity: {cartItems[index]?.quantity || 0}
                 </Text>
-              </Box>
+                <Button onClick={() => handleRemoveItem(dish.id)} ml="auto">
+                  Remove
+                </Button>
+              </Flex>
             ))}
             <Text color="black">Total: {totalPrice}€</Text>
           </Stack>
@@ -69,7 +95,12 @@ const Checkout: React.FC = () => {
           </Box>
         )}
         {dishDetails.length > 0 && (
-          <Button onClick={handleCheckout}>Place Order</Button>
+          <Flex direction="column">
+            <Button onClick={handleCheckout}>Place Order</Button>
+            <Button onClick={handleClearCart} mt={4}>
+              Clear Cart
+            </Button>
+          </Flex>
         )}
       </Box>
     </Flex>
