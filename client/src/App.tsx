@@ -3,8 +3,10 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "./pages/Home.tsx";
 import DishDetails from "./pages/DishDetails.tsx";
 import { Root } from "./components/Root.tsx";
-import Register from "./pages/Register.tsx";
+import Account from "./pages/Account.tsx";
 import Checkout from "./pages/Checkout.tsx";
+import Contact from "./pages/Contact.tsx";
+import UserOrders from "./pages/UserOrders.tsx";
 
 function App() {
   return (
@@ -15,7 +17,9 @@ function App() {
           <Route index element={<Home />} />
           <Route path="/dishes/:id" element={<DishDetails id={""} />} />
           <Route path="/checkout" element={<Checkout />} />
-          <Route path="/register" element={<Register />} />
+          <Route path="/account" element={<Account />} />
+          <Route path="/contact" element={<Contact />} />
+          <Route path="/orders" element={<UserOrders />} />
         </Route>
       </Routes>
     </BrowserRouter>
