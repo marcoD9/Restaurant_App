@@ -82,13 +82,12 @@ export const CartProvider: React.FC<{ children: React.ReactNode }> = ({
     userId: string
   ): Promise<Order | null> => {
     try {
-      const orderDishes = JSON.stringify(cartItems);
       const order = await createOrder(
         token,
         time,
         "Pending",
         userId,
-        orderDishes
+        cartItems // Pass the cartItems array directly
       );
       clearCart();
       setSuccess("Order successfully created!");
