@@ -6,6 +6,7 @@ import createOrder from "../services/orders/createOrder.ts";
 import deleteOrderById from "../services/orders/deleteOrderById.ts";
 import updateOrderById from "../services/orders/updateOrderById.ts";
 import authMiddleware from "../middlewares/auth.ts";
+import getOrdersByUserId from "../services/orders/getOrdersByUserId.ts";
 
 const router = Router();
 
@@ -31,6 +32,27 @@ router.get(
         res.status(404).json({ message: `Order with ${id} not found!` });
       } else {
         res.status(200).json(order);
+      }
+    } catch (error) {
+      next(error);
+    }
+  }
+);
+
+// GET orders by User Id
+router.get(
+  "/user/:userId",
+  authMiddleware,
+  async (req: Request, res: Response, next: NextFunction) => {
+    try {
+      const { userId } = req.params;
+      const orders = await getOrdersByUserId(userId);
+      if (!orders)
+        res.status(404).json({ message: `User ${userId} not found!` });
+      else if (orders.length === 0) {
+        res.status(200).json([]);
+      } else {
+        res.status(200).json(orders);
       }
     } catch (error) {
       next(error);
