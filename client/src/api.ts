@@ -133,7 +133,7 @@ export const createOrder = async (
   time: Date,
   orderStatus: string,
   userId: string,
-  orderDishes: string
+  orderDishes: { dishId: string; quantity: number }[]
 ): Promise<Order> => {
   try {
     const response = await fetch("http://localhost:3000/orders", {
@@ -143,7 +143,7 @@ export const createOrder = async (
         Authorization: `Bearer ${token}`,
       },
       body: JSON.stringify({
-        time: time,
+        time: time.toISOString(),
         orderStatus: orderStatus || "Penfing", //Default value
         userId: userId,
         orderDishes: orderDishes,
@@ -159,5 +159,34 @@ export const createOrder = async (
     if (error instanceof Error) {
       throw new Error(error.message);
     } else throw new Error("An unknown error occurred.");
+  }
+};
+
+//GET Order By UserId
+export const fetchOrdersByUserId = async (
+  userId: string,
+  token: string
+): Promise<Order> => {
+  try {
+    const response = await fetch(
+      `http://localhost:3000/orders/user/${userId}`,
+      {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      }
+    );
+    if (!response.ok) {
+      throw new Error("Failed to fetch Orders or User");
+    }
+
+    const data: Order = await response.json();
+    return data;
+  } catch (e: unknown) {
+    if (e instanceof Error) {
+      throw new Error(e.message);
+    } else {
+      throw new Error("An unknown error occurred.");
+    }
   }
 };
