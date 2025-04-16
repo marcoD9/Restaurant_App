@@ -1,11 +1,13 @@
 import CreateAccountForm from "@/components/CreateAccountForm";
+import UserLogin from "@/components/UserLogin";
 
-const Register: React.FC = () => {
+const Account: React.FC = () => {
   return (
     <>
+      <UserLogin />
       <CreateAccountForm />
     </>
   );
 };
 
-export default Register;
+export default Account;

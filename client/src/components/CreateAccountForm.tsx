@@ -9,6 +9,11 @@ const CreateAccountForm: React.FC = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [phoneNumber, setPhoneNumber] = useState("");
+  const [showForm, setShowForm] = useState(false);
+
+  const handleButtonClick = () => {
+    setShowForm(true);
+  };
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
@@ -16,115 +21,123 @@ const CreateAccountForm: React.FC = () => {
   };
 
   return (
-    <Box width="300px" padding="20px" borderRadius="8px">
-      <form onSubmit={handleSubmit}>
-        <VStack>
-          <div>
-            <label
-              htmlFor="username"
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                color: "black",
-              }}
-            >
-              Username
-            </label>
-            <Input
-              type="text"
-              id="username"
-              placeholder="Username"
-              className="text-color-primary"
-              value={username}
-              onChange={(e) => setUsername(e.target.value)}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="password"
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                color: "black",
-              }}
-            >
-              Password
-            </label>
-            <Input
-              type="password"
-              id="password"
-              placeholder="Password"
-              className="text-color-primary"
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="name"
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                color: "black",
-              }}
-            >
-              Name
-            </label>
-            <Input
-              type="text"
-              id="name"
-              placeholder="Name"
-              className="text-color-primary"
-              value={name}
-              onChange={(e) => setName(e.target.value)}
-            />
-          </div>{" "}
-          <div>
-            <label
-              htmlFor="email"
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                color: "black",
-              }}
-            >
-              Email
-            </label>
-            <Input
-              type="email"
-              id="email"
-              placeholder="Email"
-              className="text-color-primary"
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-            />
-          </div>
-          <div>
-            <label
-              htmlFor="phoneNumber"
-              style={{
-                display: "block",
-                marginBottom: "4px",
-                color: "black",
-              }}
-            >
-              Phone Number
-            </label>
-            <Input
-              type="text"
-              id="phoneNumber"
-              placeholder="Phone Number"
-              className="text-color-primary"
-              value={phoneNumber}
-              onChange={(e) => setPhoneNumber(e.target.value)}
-            />
-          </div>
-          <Button className="text-color-primary" width="full" type="submit">
-            Create Account
-          </Button>
-        </VStack>
-      </form>
-    </Box>
+    <>
+      {!showForm ? (
+        <Box>
+          <Button onClick={handleButtonClick}> Create Account</Button>
+        </Box>
+      ) : (
+        <Box width="300px" padding="20px" borderRadius="8px">
+          <form onSubmit={handleSubmit}>
+            <VStack>
+              <div>
+                <label
+                  htmlFor="username"
+                  style={{
+                    display: "block",
+                    marginBottom: "4px",
+                    color: "black",
+                  }}
+                >
+                  Username
+                </label>
+                <Input
+                  type="text"
+                  id="username"
+                  placeholder="Username"
+                  className="text-color-primary"
+                  value={username}
+                  onChange={(e) => setUsername(e.target.value)}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="password"
+                  style={{
+                    display: "block",
+                    marginBottom: "4px",
+                    color: "black",
+                  }}
+                >
+                  Password
+                </label>
+                <Input
+                  type="password"
+                  id="password"
+                  placeholder="Password"
+                  className="text-color-primary"
+                  value={password}
+                  onChange={(e) => setPassword(e.target.value)}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="name"
+                  style={{
+                    display: "block",
+                    marginBottom: "4px",
+                    color: "black",
+                  }}
+                >
+                  Name
+                </label>
+                <Input
+                  type="text"
+                  id="name"
+                  placeholder="Name"
+                  className="text-color-primary"
+                  value={name}
+                  onChange={(e) => setName(e.target.value)}
+                />
+              </div>{" "}
+              <div>
+                <label
+                  htmlFor="email"
+                  style={{
+                    display: "block",
+                    marginBottom: "4px",
+                    color: "black",
+                  }}
+                >
+                  Email
+                </label>
+                <Input
+                  type="email"
+                  id="email"
+                  placeholder="Email"
+                  className="text-color-primary"
+                  value={email}
+                  onChange={(e) => setEmail(e.target.value)}
+                />
+              </div>
+              <div>
+                <label
+                  htmlFor="phoneNumber"
+                  style={{
+                    display: "block",
+                    marginBottom: "4px",
+                    color: "black",
+                  }}
+                >
+                  Phone Number
+                </label>
+                <Input
+                  type="text"
+                  id="phoneNumber"
+                  placeholder="Phone Number"
+                  className="text-color-primary"
+                  value={phoneNumber}
+                  onChange={(e) => setPhoneNumber(e.target.value)}
+                />
+              </div>
+              <Button className="text-color-primary" width="full" type="submit">
+                Create Account
+              </Button>
+            </VStack>
+          </form>
+        </Box>
+      )}
+    </>
   );
 };
 
