@@ -32,9 +32,14 @@ export interface NewUser {
 
 export interface Order {
   id: string;
-  price: number;
+  totalPrice: number;
   time: Date;
   orderStatus: string;
   userId: string;
-  orderDishes: string;
+  orderDishes: OrderDish[]; // Array of order dishes
+}
+
+export interface OrderDish {
+  dishId: string;
+  quantity: number;
 }
