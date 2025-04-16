@@ -11,8 +11,10 @@ import {
   Flex,
   Image,
 } from "@chakra-ui/react";
+import { useNavigate } from "react-router-dom";
 
 const Checkout: React.FC = () => {
+  const navigate = useNavigate();
   const { cartItems, createOrderFromCart, removeFromCart, clearCart } =
     useCart();
   const [dishDetails, setDishDetails] = useState<Dish[]>([]);
@@ -103,6 +105,7 @@ const Checkout: React.FC = () => {
           </Flex>
         )}
       </Box>
+      <Button onClick={() => navigate("/orders")}>Your Orders</Button>
     </Flex>
   );
 };
