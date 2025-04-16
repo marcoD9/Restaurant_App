@@ -1690,6 +1690,106 @@
 								}
 							},
 							"response": []
+						},
+						{
+							"name": "GET orders by User ID",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Reset the jwt_token collection variable before each request\r",
+											"pm.collectionVariables.unset(\"jwt_token\");\r",
+											"\r",
+											"// Get username and password from environment variables\r",
+											"const username = pm.environment.get('username');\r",
+											"const password = pm.environment.get('password');\r",
+											"\r",
+											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
+											"    console.log(\"Starting login request...\");\r",
+											"\r",
+											"    // Send the login request\r",
+											"    pm.sendRequest({\r",
+											"        url: pm.environment.get('baseUrl') + '/login',\r",
+											"        method: 'POST',\r",
+											"        header: { 'Content-Type': 'application/json' },\r",
+											"        body: {\r",
+											"            mode: 'raw',\r",
+											"            raw: JSON.stringify({ username, password })\r",
+											"        }\r",
+											"    }, function (err, res) {\r",
+											"        if (err) {\r",
+											"            console.error(\"Login failed:\", err);\r",
+											"            return;\r",
+											"        }\r",
+											"\r",
+											"        const token = res.json().token;\r",
+											"        if (token) {\r",
+											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
+											"            console.log(\"Login successful, token saved.\");\r",
+											"        } else {\r",
+											"            console.error(\"Login failed: token not found.\");\r",
+											"        }\r",
+											"    });\r",
+											"} else {\r",
+											"    console.log(\"Token already exists.\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Test for status code\r",
+											"pm.test(\"Status code is 200\", function () {\r",
+											"    pm.response.to.have.status(200);\r",
+											"});"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/orders/user/123-0968rt-4867-32345re",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										"user",
+										"123-0968rt-4867-32345re"
+									]
+								}
+							},
+							"response": []
 						}
 					]
 				},
@@ -1782,6 +1882,107 @@
 									"path": [
 										"orders",
 										"9231f82f-22f3-4981-8727-226f30d880003"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET orders by User ID 404",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Reset the jwt_token collection variable before each request\r",
+											"pm.collectionVariables.unset(\"jwt_token\");\r",
+											"\r",
+											"// Get username and password from environment variables\r",
+											"const username = pm.environment.get('username');\r",
+											"const password = pm.environment.get('password');\r",
+											"\r",
+											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
+											"    console.log(\"Starting login request...\");\r",
+											"\r",
+											"    // Send the login request\r",
+											"    pm.sendRequest({\r",
+											"        url: pm.environment.get('baseUrl') + '/login',\r",
+											"        method: 'POST',\r",
+											"        header: { 'Content-Type': 'application/json' },\r",
+											"        body: {\r",
+											"            mode: 'raw',\r",
+											"            raw: JSON.stringify({ username, password })\r",
+											"        }\r",
+											"    }, function (err, res) {\r",
+											"        if (err) {\r",
+											"            console.error(\"Login failed:\", err);\r",
+											"            return;\r",
+											"        }\r",
+											"\r",
+											"        const token = res.json().token;\r",
+											"        if (token) {\r",
+											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
+											"            console.log(\"Login successful, token saved.\");\r",
+											"        } else {\r",
+											"            console.error(\"Login failed: token not found.\");\r",
+											"        }\r",
+											"    });\r",
+											"} else {\r",
+											"    console.log(\"Token already exists.\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"pm.test(\"Response status code is 404\", function () {\r",
+											"  pm.response.to.have.status(404);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/orders/user/123-0968rt-4867-32345re4444545",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										"user",
+										"123-0968rt-4867-32345re4444545"
 									]
 								}
 							},
@@ -2170,6 +2371,108 @@
 									"path": [
 										"orders",
 										"85cba47e-4b70-41a5-bc90-355257b2030d"
+									]
+								}
+							},
+							"response": []
+						},
+						{
+							"name": "GET orders by User ID 403",
+							"event": [
+								{
+									"listen": "prerequest",
+									"script": {
+										"exec": [
+											"// Reset the jwt_token collection variable before each request\r",
+											"pm.collectionVariables.unset(\"jwt_token\");\r",
+											"\r",
+											"// Get username and password from environment variables\r",
+											"const username = pm.environment.get('wrong_username');\r",
+											"const password = pm.environment.get('wrong_password');\r",
+											"\r",
+											"if (!pm.collectionVariables.get(\"jwt_token\")) {\r",
+											"    console.log(\"Starting login request...\");\r",
+											"\r",
+											"    // Send the login request\r",
+											"    pm.sendRequest({\r",
+											"        url: pm.environment.get('baseUrl') + '/login',\r",
+											"        method: 'POST',\r",
+											"        header: { 'Content-Type': 'application/json' },\r",
+											"        body: {\r",
+											"            mode: 'raw',\r",
+											"            raw: JSON.stringify({ username, password })\r",
+											"        }\r",
+											"    }, function (err, res) {\r",
+											"        if (err) {\r",
+											"            console.log(\"Login failed:\", err);\r",
+											"            return;\r",
+											"        }\r",
+											"\r",
+											"        const token = res.json().token;\r",
+											"        if (token) {\r",
+											"            pm.collectionVariables.set(\"jwt_token\", token);\r",
+											"            console.log(\"Login successful, token saved.\");\r",
+											"        } else {\r",
+											"            console.log(\"Login failed: token not found.\");\r",
+											"        }\r",
+											"    });\r",
+											"} else {\r",
+											"    console.log(\"Token already exists.\");\r",
+											"}"
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								},
+								{
+									"listen": "test",
+									"script": {
+										"exec": [
+											"// Test for status code\r",
+											"pm.test(\"Status code is 403\", function () {\r",
+											"    pm.response.to.have.status(403);\r",
+											"});\r",
+											"\r",
+											""
+										],
+										"type": "text/javascript",
+										"packages": {}
+									}
+								}
+							],
+							"protocolProfileBehavior": {
+								"disableBodyPruning": true
+							},
+							"request": {
+								"auth": {
+									"type": "noauth"
+								},
+								"method": "GET",
+								"header": [
+									{
+										"key": "Authorization",
+										"value": "Bearer {{jwt_token}}",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{baseUrl}}/orders/user/123-0968rt-4867-32345re",
+									"host": [
+										"{{baseUrl}}"
+									],
+									"path": [
+										"orders",
+										"user",
+										"123-0968rt-4867-32345re"
 									]
 								}
 							},
