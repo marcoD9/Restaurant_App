@@ -65,16 +65,28 @@ const UserOrders: React.FC = () => {
   }, [loggedInUserId, token]);
 
   if (error) {
-    return <Text color="black">Error loading orders: {error}</Text>;
+    return (
+      <Box className="center-rowd">
+        <Text color="black" margin={4}>
+          Error loading orders: {error}
+        </Text>
+      </Box>
+    );
   }
 
   if (!ordersWithDetails || ordersWithDetails.length === 0) {
-    return <Text color="black">No orders found for this user.</Text>;
+    return (
+      <Box className="center-row">
+        <Text color="black" margin={4}>
+          No orders found for this user.
+        </Text>{" "}
+      </Box>
+    );
   }
 
   return (
-    <Box>
-      <Heading color="black" mb={4}>
+    <Box className="center-col">
+      <Heading color="black" my={4}>
         Your Orders
       </Heading>
       <VStack align="stretch">

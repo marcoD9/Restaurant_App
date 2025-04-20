@@ -78,13 +78,13 @@ const Checkout: React.FC = () => {
   };
 
   return (
-    <Flex direction="column" align="center" minH="100vh">
+    <Flex className="center-col">
       <Box maxW="md" p={4}>
         <Heading color="black">Checkout</Heading>
         {dishDetails.length > 0 ? (
           <Stack>
             {dishDetails.map((dish, index) => (
-              <Flex key={dish.id} align="center">
+              <Flex key={dish.id}>
                 <Image src={dish.image} alt={dish.name} boxSize="50px" mr={4} />
                 <Text color="black">
                   {dish.name} - Quantity: {cartItems[index]?.quantity || 0}
