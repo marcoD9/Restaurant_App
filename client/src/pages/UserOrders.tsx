@@ -1,72 +1,129 @@
 import React, { useState, useEffect } from "react";
-
-import { fetchOrdersByUserId } from "../api";
+import { fetchOrdersByUserId, fetchDishById } from "../api";
 import { useAuth } from "../contexts/AuthContext";
-import { Box, Flex, Heading, Text } from "@chakra-ui/react";
-import { Order } from "@/types";
-//import { OrderDish } from "@/types";
+import { Box, Heading, Text, VStack, Image, HStack } from "@chakra-ui/react";
+import { Order, Dish } from "@/types";
+
+interface OrderWithDishDetails extends Order {
+  dishesDetails: { [dishId: string]: Dish };
+}
 
 const UserOrders: React.FC = () => {
   const { token, user } = useAuth();
   const loggedInUserId = user?.id;
-  const [orders, setOrders] = useState<Order[]>([]);
-  const [loading, setLoading] = useState(true);
+  const [ordersWithDetails, setOrdersWithDetails] = useState<
+    OrderWithDishDetails[]
+  >([]);
   const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
-    const loadUserOrders = async () => {
+    const loadOrdersWithDishDetails = async () => {
       if (loggedInUserId && token) {
-        setLoading(true);
         setError(null);
         try {
           const fetchedOrders = await fetchOrdersByUserId(
             loggedInUserId,
             token
           );
-          setOrders([fetchedOrders].flat());
-          // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
+          const ordersWithDetailsPromises = (
+            fetchedOrders as unknown as Order[]
+          ).map(async (order: Order) => {
+            const dishesDetails: { [dishId: string]: Dish } = {};
+            const dishDetailsPromises = order.orderDishes.map(
+              async (orderDish: { dishId: string }) => {
+                try {
+                  const dish = await fetchDishById(orderDish.dishId);
+                  dishesDetails[orderDish.dishId] = dish;
+                } catch (error) {
+                  console.error(
+                    `Failed to fetch details for dish ID ${orderDish.dishId}:`,
+                    error
+                  );
+                }
+              }
+            );
+            await Promise.all(dishDetailsPromises);
+            return { ...order, dishesDetails };
+          });
+
+          const ordersWithFullDetails: OrderWithDishDetails[] =
+            await Promise.all(
+              ordersWithDetailsPromises as Promise<OrderWithDishDetails>[]
+            );
+          setOrdersWithDetails(ordersWithFullDetails);
         } catch (err: unknown) {
-          // ... gestione dell'errore ...
-        } finally {
-          setLoading(false);
+          if (err instanceof Error) {
+            setError(err.message);
+          } else {
+            setError("An unknown error occurred.");
+          }
         }
       }
     };
-    loadUserOrders();
+    loadOrdersWithDishDetails();
   }, [loggedInUserId, token]);
 
-  if (loading) {
-    return <div>Loading orders...</div>;
-  }
-
   if (error) {
-    return <div>Error loading orders: {error}</div>;
+    return <Text color="black">Error loading orders: {error}</Text>;
   }
 
-  if (!orders || orders.length === 0) {
-    return <div>No orders found for this user.</div>;
+  if (!ordersWithDetails || ordersWithDetails.length === 0) {
+    return <Text color="black">No orders found for this user.</Text>;
   }
 
   return (
     <Box>
-      <Heading color="black">Your Orders</Heading>
-      <Flex>
-        {orders.map((order) => (
+      <Heading color="black" mb={4}>
+        Your Orders
+      </Heading>
+      <VStack align="stretch">
+        {ordersWithDetails.map((order) => (
           <Box
-            color="black"
             key={order.id}
             borderWidth="1px"
             borderRadius="lg"
             p={4}
-            m={2}
+            color="black"
           >
-            <Text>Order ID: {order.id}</Text>
+            <Text fontWeight="bold">Order ID: {order.id}</Text>
             <Text>Order Time: {new Date(order.time).toLocaleString()}</Text>
             <Text>Total Price: ${order.totalPrice}</Text>
             <Text>Status: {order.orderStatus}</Text>
+
+            {order.orderDishes && order.orderDishes.length > 0 && (
+              <Box mt={2}>
+                <Text fontWeight="bold">Dishes:</Text>
+                <VStack align="start" ml={4}>
+                  {order.orderDishes.map((item) => {
+                    const dishDetails = order.dishesDetails[item.dishId];
+                    return dishDetails ? (
+                      <HStack key={item.dishId}>
+                        <Image
+                          src={dishDetails.image}
+                          alt={dishDetails.name}
+                          boxSize="50px"
+                          objectFit="cover"
+                          borderRadius="md"
+                        />
+                        <Text>
+                          {dishDetails.name} - Quantity: {item.quantity} -
+                          Price: ${dishDetails.price}
+                        </Text>
+                      </HStack>
+                    ) : (
+                      <Text key={item.dishId}>Loading dish details...</Text>
+                    );
+                  })}
+                </VStack>
+              </Box>
+            )}
+            {order.orderDishes && order.orderDishes.length === 0 && (
+              <Text mt={2}>No dishes in this order.</Text>
+            )}
           </Box>
         ))}
-      </Flex>
+      </VStack>
     </Box>
   );
 };
