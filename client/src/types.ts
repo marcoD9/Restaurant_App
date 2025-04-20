@@ -31,6 +31,7 @@ export interface NewUser {
 }
 
 export interface Order {
+  map(arg0: (order: unknown) => Promise<unknown>): unknown;
   id: string;
   totalPrice: number;
   time: Date;
