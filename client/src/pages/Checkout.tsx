@@ -55,15 +55,20 @@ const Checkout: React.FC = () => {
     const time = new Date();
 
     if (token && userId) {
+      // User is logged in, proceed with order creation
       const order = await createOrderFromCart(token, time, userId);
       if (order) {
-        console.log("Order created:", order);
+        // Navigate to the orders page after successful order creation
+        navigate("/orders");
+      } else {
+        console.error("Failed to create order.");
       }
     } else {
-      console.error("Token or userId not found");
+      // User is not logged in, redirect to account page
+      navigate("/account");
+      console.error("User not logged in. Redirecting to account page.");
     }
   };
-
   const handleRemoveItem = (dishId: string) => {
     removeFromCart(dishId);
   };
