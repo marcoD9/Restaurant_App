@@ -21,7 +21,7 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
   return (
     <Box display="flex" flexDirection="row" p={4} gap={4}>
       <Input
-        color="black"
+        className="text-color-primary"
         type="number"
         value={quantity}
         onChange={(e) => setQuantity(parseInt(e.target.value))}
@@ -29,8 +29,12 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
         max={100}
         width="80px"
       />
-      <Button onClick={handleAddToCart}>Add</Button>
-      <Button onClick={handleRemoveFromCart}>Remove Item</Button>
+      <Button className="button" onClick={handleAddToCart}>
+        Add
+      </Button>
+      <Button className="button" onClick={handleRemoveFromCart}>
+        Remove Item
+      </Button>
     </Box>
   );
 };

@@ -31,10 +31,19 @@ const UserLogin = () => {
         // If user is logged in, show user info and logout button
 
         <Box mt={4} textAlign="center">
-          <Text fontWeight="bold" color="black">
-            Welcome {user.name}
+          <Text
+            className="text-color-primary"
+            fontSize="2xl"
+            fontWeight="bold"
+            textAlign="center"
+            mb={8}
+            mt={8}
+          >
+            Welcome, {user.name}
           </Text>
-          <Button onClick={() => logout()}>Logout</Button>
+          <Button className="button" onClick={() => logout()}>
+            Logout
+          </Button>
         </Box>
       ) : (
         // If user is not logged in, show the login form

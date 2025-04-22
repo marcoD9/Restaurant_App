@@ -79,38 +79,62 @@ const Checkout: React.FC = () => {
 
   return (
     <Flex className="center-col">
-      <Box maxW="md" p={4}>
-        <Heading color="black">Checkout</Heading>
+      <Box maxW="md" p={4} textAlign="center">
+        <Heading
+          fontSize="2xl"
+          fontWeight="bold"
+          textAlign="center"
+          className="text-color-primary"
+          mb={4}
+          mt={8}
+        >
+          Checkout
+        </Heading>
         {dishDetails.length > 0 ? (
           <Stack>
             {dishDetails.map((dish, index) => (
               <Flex key={dish.id}>
                 <Image src={dish.image} alt={dish.name} boxSize="50px" mr={4} />
-                <Text color="black">
+                <Text className="text-color-primary">
                   {dish.name} - Quantity: {cartItems[index]?.quantity || 0}
                 </Text>
-                <Button onClick={() => handleRemoveItem(dish.id)} ml="auto">
+                <Button
+                  className="button"
+                  onClick={() => handleRemoveItem(dish.id)}
+                  ml="auto"
+                >
                   Remove
                 </Button>
               </Flex>
             ))}
-            <Text color="black">Total: {totalPrice}€</Text>
+            <Text className="text-color-primary">Total: {totalPrice}€</Text>
           </Stack>
         ) : (
           <Box>
-            <Text color="black">Your cart is empty.</Text>
+            <Text
+              fontSize="2xl"
+              textAlign="center"
+              className="text-color-primary"
+              mb={4}
+            >
+              Your cart is empty.
+            </Text>
           </Box>
         )}
         {dishDetails.length > 0 && (
           <Flex direction="column">
-            <Button onClick={handleCheckout}>Place Order</Button>
-            <Button onClick={handleClearCart} mt={4}>
+            <Button className="button" onClick={handleCheckout}>
+              Place Order
+            </Button>
+            <Button className="button" onClick={handleClearCart} mt={4}>
               Clear Cart
             </Button>
           </Flex>
         )}
       </Box>
-      <Button onClick={() => navigate("/orders")}>Your Orders</Button>
+      <Button className="button" onClick={() => navigate("/orders")}>
+        Your Orders
+      </Button>
     </Flex>
   );
 };

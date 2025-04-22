@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, Text } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import { fetchDishById } from "../api";
 import { Dish } from "../types";
@@ -31,16 +31,16 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
   }, [id]);
 
   if (error) {
-    return <div>Error: {error}</div>;
+    return <Text color="red">Error: {error}</Text>;
   }
 
   if (!dish) {
-    return <div>Loading...</div>;
+    return <Text className="text-color-primary">Loading...</Text>;
   }
   return (
     <div>
       {/*Dish*/}
-      <Box className="center-col">
+      <Box className="center-col gap-4">
         <Flex className="center-col">
           <DishCard key={dish.id} dish={dish} showDescription={true} />
           <Cart dishId={dish.id} />

@@ -9,20 +9,11 @@
 }
 
 .text-color-primary {
-  color: var(--color-black);
+  color: var(--color-gray-800);
 }
 
 .text-color-price {
-  color: var(--color-black);
-}
-
-.button-color-primary {
-  background-color: var(--color-orange-600);
-  color: var(--color-white);
-}
-.button-color-test {
-  background-color: var(--color-orange-100);
-  color: var(--color-white);
+  color: var(--color-gray-800);
 }
 
 @layer utilities {

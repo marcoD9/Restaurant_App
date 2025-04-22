@@ -24,7 +24,10 @@ const CreateAccountForm: React.FC = () => {
     <>
       {!showForm ? (
         <Box>
-          <Button onClick={handleButtonClick}> Create Account</Button>
+          <Button className="button" onClick={handleButtonClick}>
+            {" "}
+            Create Account
+          </Button>
         </Box>
       ) : (
         <Box width="300px" padding="20px" borderRadius="8px">
@@ -130,7 +133,7 @@ const CreateAccountForm: React.FC = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </div>
-              <Button className="text-color-primary" width="full" type="submit">
+              <Button className="button" width="full" type="submit">
                 Create Account
               </Button>
             </VStack>

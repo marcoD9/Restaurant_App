@@ -11,7 +11,7 @@ function DishCard({ dish, showDescription = false }: DishCardProps) {
     <Box
       m={8}
       p={8}
-      className="bg-secondary center-col rounded-lg shadow-lg max-w-3xl"
+      className="bg-white center-col rounded-lg shadow-lg max-w-2xl"
     >
       <Image src={dish.image} alt={dish.name} />
       <Stack mt="6">

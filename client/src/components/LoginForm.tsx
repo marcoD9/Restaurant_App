@@ -54,7 +54,7 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button className="text-color-primary" width="full" type="submit">
+          <Button className="button" width="full" type="submit">
             Login
           </Button>
         </VStack>

@@ -77,7 +77,7 @@ const UserOrders: React.FC = () => {
   if (!ordersWithDetails || ordersWithDetails.length === 0) {
     return (
       <Box className="center-row">
-        <Text color="black" margin={4}>
+        <Text className="text-color-primary" margin={4}>
           No orders found for this user.
         </Text>{" "}
       </Box>
@@ -86,7 +86,7 @@ const UserOrders: React.FC = () => {
 
   return (
     <Box className="center-col">
-      <Heading color="black" my={4}>
+      <Heading className="text-color-primary" my={4}>
         Your Orders
       </Heading>
       <VStack align="stretch">
@@ -96,7 +96,7 @@ const UserOrders: React.FC = () => {
             borderWidth="1px"
             borderRadius="lg"
             p={4}
-            color="black"
+            className="text-color-primary"
           >
             <Text fontWeight="bold">Order ID: {order.id}</Text>
             <Text>Order Time: {new Date(order.time).toLocaleString()}</Text>
