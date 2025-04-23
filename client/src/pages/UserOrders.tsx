@@ -66,8 +66,8 @@ const UserOrders: React.FC = () => {
 
   if (error) {
     return (
-      <Box className="center-rowd">
-        <Text color="black" margin={4}>
+      <Box className="center-col">
+        <Text className="text-color-primary" m={4}>
           Error loading orders: {error}
         </Text>
       </Box>
@@ -76,8 +76,8 @@ const UserOrders: React.FC = () => {
 
   if (!ordersWithDetails || ordersWithDetails.length === 0) {
     return (
-      <Box className="center-row">
-        <Text className="text-color-primary" margin={4}>
+      <Box className="center-col">
+        <Text className="text-color-primary" m={4}>
           No orders found for this user.
         </Text>{" "}
       </Box>
@@ -86,27 +86,45 @@ const UserOrders: React.FC = () => {
 
   return (
     <Box className="center-col">
-      <Heading className="text-color-primary" my={4}>
+      <Heading className="text-color-primary" m={4} fontWeight={"bold"}>
         Your Orders
       </Heading>
       <VStack align="stretch">
         {ordersWithDetails.map((order) => (
           <Box
             key={order.id}
-            borderWidth="1px"
-            borderRadius="lg"
+            className="border border-gray-200 rounded-lg text-color-primary"
             p={4}
-            className="text-color-primary"
           >
-            <Text fontWeight="bold">Order ID: {order.id}</Text>
-            <Text>Order Time: {new Date(order.time).toLocaleString()}</Text>
-            <Text>Total Price: ${order.totalPrice}</Text>
-            <Text>Status: {order.orderStatus}</Text>
+            <Text>
+              <Text fontWeight="bold" as="span">
+                Order ID:{" "}
+              </Text>{" "}
+              {order.id}
+            </Text>
+            <Text>
+              <Text fontWeight="bold" as="span">
+                Order Time:
+              </Text>{" "}
+              {new Date(order.time).toLocaleString()}
+            </Text>
+            <Text>
+              <Text fontWeight="bold" as="span">
+                Total Price:
+              </Text>{" "}
+              ${order.totalPrice}
+            </Text>
+            <Text>
+              <Text fontWeight="bold" as="span">
+                Status:{" "}
+              </Text>
+              {order.orderStatus}
+            </Text>
 
             {order.orderDishes && order.orderDishes.length > 0 && (
               <Box mt={2}>
                 <Text fontWeight="bold">Dishes:</Text>
-                <VStack align="start" ml={4}>
+                <VStack className="items-start" ml={4}>
                   {order.orderDishes.map((item) => {
                     const dishDetails = order.dishesDetails[item.dishId];
                     return dishDetails ? (
@@ -114,9 +132,7 @@ const UserOrders: React.FC = () => {
                         <Image
                           src={dishDetails.image}
                           alt={dishDetails.name}
-                          boxSize="50px"
-                          objectFit="cover"
-                          borderRadius="md"
+                          className="w-12 h-12 object-cover rounded-md"
                         />
                         <Text>
                           {dishDetails.name} - Quantity: {item.quantity} -

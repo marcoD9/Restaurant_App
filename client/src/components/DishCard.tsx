@@ -24,7 +24,7 @@ function DishCard({ dish, showDescription = false }: DishCardProps) {
           </Text>
         ) : null}{" "}
         {/*Render description only if the prop is true*/}
-        <Text className="text-color-price" fontSize="lg">
+        <Text className="text-color-primary" fontSize="lg">
           {dish.price}€
         </Text>
       </Stack>

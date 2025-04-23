@@ -32,10 +32,9 @@ const UserLogin = () => {
 
         <Box mt={4} textAlign="center">
           <Text
-            className="text-color-primary"
+            className="text-color-primary text-center"
             fontSize="2xl"
             fontWeight="bold"
-            textAlign="center"
             mb={8}
             mt={8}
           >

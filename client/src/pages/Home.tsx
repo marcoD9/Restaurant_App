@@ -7,7 +7,6 @@ import { fetchDish } from "../api";
 
 const Home: React.FC = () => {
   const [dishes, setDishes] = useState<Dish[]>([]);
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [error, setError] = useState<string | null>(null);
 
   //Fetch Dishes
@@ -28,50 +27,28 @@ const Home: React.FC = () => {
     loadData();
   }, []);
 
-  const toggleMenu = () => {
-    setIsMenuOpen(!isMenuOpen);
-  };
-
   return (
     <div>
       {/*Image and Name*/}
       <Flex
-        direction="column"
-        align="center"
-        justify="center"
-        bgImage="url('/LittleItaly.jpg')"
-        bgRepeat="no-repeat"
-        bgSize="cover"
-        minH="80vh"
-        textAlign="center"
-        color="white"
-        padding={8}
-        mb={20}
+        className="center-col bg-no-repeat bg-cover min-h-[80vh] text-center text-white"
+        mb={12}
+        style={{ backgroundImage: "url('/LittleItaly.jpg')" }}
       ></Flex>
       {/*About Us*/}
-      {/*About Us*/}
-      <Box className="py-16 bg-gray-100 relative overflow-hidden" minH="500px">
+      <Box className="bg-gray-100 relative overflow-hidden min-h-[30vh]">
         <Heading
-          mt={{ base: 20, md: 24 }}
-          mb={{ base: 8, md: 10 }}
-          fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"
-          textAlign="center"
-          color="gray.800"
+          className="text-color-primary text-center"
+          fontSize={["xl", "2xl", "3xl"]}
+          fontWeight={"bold"}
         >
           ABOUT US
         </Heading>
-        <Box
-          className="absolute left-0 top-0 bottom-0 bg-green-500"
-          width={{ base: "20px", md: "40px", lg: "60px" }}
-        />
-        <Box
-          className="absolute right-0 top-0 bottom-0 bg-red-500"
-          width={{ base: "20px", md: "40px", lg: "60px" }}
-        />
-        <Container maxW="container.xl" px={{ base: 4, md: 6, lg: 8 }}>
-          <Box mt={8} textAlign="left" className="text-color-primary">
-            <Text fontSize="lg" m={20} fontStyle="serif">
+        <Box className="absolute left-0 top-0 bottom-0 bg-green-500 w-[20px] md:w-[40px] lg:w-[60px]" />
+        <Box className="absolute right-0 top-0 bottom-0 bg-red-500 w-[20px] md:w-[40px] lg:w-[60px]" />
+        <Container className="max-w-7xl ">
+          <Box className="text-left text-color-primary">
+            <Text fontWeight={"thin"} my={20}>
               Step into Little Italy, your authentic neighborhood trattoria.
               We're passionate about bringing the true flavors of Italy to your
               table, using fresh, high-quality ingredients and time-honored
@@ -84,40 +61,31 @@ const Home: React.FC = () => {
       </Box>
       {/*Dish*/}
 
-      <Flex direction="column" align="center" mt={20} mb={8}>
+      <Flex className="center-col" my={12}>
         <Heading
-          className="text-color-primary transition duration-300 ease-in-out hover:scale-105"
-          fontSize={{ base: "2xl", md: "3xl" }}
-          fontWeight="bold"
-          textAlign="center"
-          onClick={toggleMenu}
-          cursor="pointer"
+          className="text-color-primary text-center"
+          fontSize={["xl", "2xl", "3xl"]}
+          fontWeight={"bold"}
         >
           DISHES
         </Heading>
         {error && (
-          <Text color="red.500" mt={4}>
+          <Text className="text-red-500" mt={8}>
             {error}
           </Text>
         )}
-
-        {isMenuOpen && (
-          <Flex className="center-row" wrap="wrap" justify="center" mt={4}>
-            {dishes.map((dish) => (
-              <Link key={dish.id} to={`/dishes/${dish.id}`}>
-                <Box
-                  key={dish.id}
-                  _hover={{
-                    transform: "scale(1.03)",
-                    transition: "transform 0.2s ease-in-out",
-                  }}
-                >
-                  <DishCard dish={dish} />
-                </Box>
-              </Link>
-            ))}
-          </Flex>
-        )}
+        <Flex className="flex-wrap justify-center " mt={8}>
+          {dishes.map((dish) => (
+            <Link key={dish.id} to={`/dishes/${dish.id}`}>
+              <Box
+                key={dish.id}
+                className="hover:scale-103 transition-transform duration-200 ease-in-out"
+              >
+                <DishCard dish={dish} />
+              </Box>
+            </Link>
+          ))}
+        </Flex>
       </Flex>
     </div>
   );

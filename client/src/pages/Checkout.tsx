@@ -79,12 +79,11 @@ const Checkout: React.FC = () => {
 
   return (
     <Flex className="center-col">
-      <Box maxW="md" p={4} textAlign="center">
+      <Box p={4}>
         <Heading
           fontSize="2xl"
           fontWeight="bold"
-          textAlign="center"
-          className="text-color-primary"
+          className="text-color-primary text-center"
           mb={4}
           mt={8}
         >
@@ -112,9 +111,8 @@ const Checkout: React.FC = () => {
         ) : (
           <Box>
             <Text
-              fontSize="2xl"
-              textAlign="center"
-              className="text-color-primary"
+              fontSize="xl"
+              className="text-color-primary text-center"
               mb={4}
             >
               Your cart is empty.

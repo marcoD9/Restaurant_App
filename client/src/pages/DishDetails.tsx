@@ -40,7 +40,7 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
   return (
     <div>
       {/*Dish*/}
-      <Box className="center-col gap-4">
+      <Box className="center-col" gap={4}>
         <Flex className="center-col">
           <DishCard key={dish.id} dish={dish} showDescription={true} />
           <Cart dishId={dish.id} />

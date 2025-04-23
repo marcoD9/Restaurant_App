@@ -19,7 +19,7 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
   };
 
   return (
-    <Box display="flex" flexDirection="row" p={4} gap={4}>
+    <Box className="center-row" p={4} gap={4}>
       <Input
         className="text-color-primary"
         type="number"
