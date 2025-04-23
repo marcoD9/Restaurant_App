@@ -33,7 +33,7 @@ const Home: React.FC = () => {
       <Flex
         className="center-col bg-no-repeat bg-cover min-h-[80vh] text-center text-white"
         mb={12}
-        style={{ backgroundImage: "url('/LittleItaly.jpg')" }}
+        style={{ backgroundImage: "url('/img/LittleItaly.jpg')" }}
       ></Flex>
       {/*About Us*/}
       <Box className="bg-gray-100 relative overflow-hidden min-h-[30vh]">
