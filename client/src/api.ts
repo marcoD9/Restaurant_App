@@ -2,7 +2,9 @@ import { Dish, LoginResponse, NewUser, Order, User } from "./types";
 // GET Dish
 export const fetchDish = async (): Promise<Dish[]> => {
   try {
-    const response = await fetch("http://localhost:3000/dishes");
+    const response = await fetch(
+      "https://restaurant-app-2oum.onrender.com/dishes"
+    );
     if (!response.ok) {
       throw new Error(`HTTP error! status: ${response.status}`);
     }
