@@ -94,7 +94,7 @@ const Checkout: React.FC = () => {
             {dishDetails.map((dish, index) => (
               <Flex key={dish.id}>
                 <Image src={dish.image} alt={dish.name} boxSize="50px" mr={4} />
-                <Text className="text-color-primary">
+                <Text className="text-color-primary" mt={2} mx={4} px={4}>
                   {dish.name} - Quantity: {cartItems[index]?.quantity || 0}
                 </Text>
                 <Button
@@ -106,7 +106,9 @@ const Checkout: React.FC = () => {
                 </Button>
               </Flex>
             ))}
-            <Text className="text-color-primary">Total: {totalPrice}€</Text>
+            <Text className="text-color-primary" fontWeight={"bold"} m={2}>
+              Total: {totalPrice}€
+            </Text>
           </Stack>
         ) : (
           <Box>
