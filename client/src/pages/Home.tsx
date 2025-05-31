@@ -33,11 +33,15 @@ const Home: React.FC = () => {
       {/*Image and Name*/}
       <Flex
         className="bg-no-repeat bg-cover bg-center min-h-[80vh] text-center text-white relative overflow-hidden"
+        shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
         mb={12}
         style={{ backgroundImage: `url(${LittleItalyImage})` }}
       ></Flex>
       {/*About Us*/}
-      <Box className="bg-gray-100 relative overflow-hidden min-h-[30vh]">
+      <Box
+        className="bg-gray-100 relative overflow-hidden min-h-[30vh] "
+        shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+      >
         <Heading
           className="text-color-primary text-center"
           fontSize={["xl", "2xl", "3xl"]}
