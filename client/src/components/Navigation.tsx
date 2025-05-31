@@ -57,7 +57,13 @@ const Navigation = () => {
           aria-label={isMobileMenuOpen ? "Open Menu" : "Close Menu"}
           bg="black"
           color="white"
+          _hover={{
+            transform: "scale(1.05)",
+            cursor: "pointer",
+          }}
+          transition="all 0.2s ease-in-out"
         >
+          {/* Renders "CLOSE" or "MENU" text based on the mobile menu's current state */}
           {isMobileMenuOpen ? "CLOSE" : "MENU"}
         </Button>
 
@@ -113,20 +119,45 @@ const Navigation = () => {
         <Stack
           mt={4}
           align="center"
+          justify="center"
           display={{ base: "flex", md: "none" }}
-          direction="column"
+          direction="row"
         >
-          <Button bg="black" color="white" onClick={() => navigate("/account")}>
+          <Button
+            bg="black"
+            color="white"
+            onClick={() => navigate("/account")} //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
             ACCOUNT
           </Button>
           <Button
             bg="black"
             color="white"
             onClick={() => navigate("/checkout")}
+            //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
           >
             CART
           </Button>
-          <Button bg="black" color="white" onClick={() => navigate("/contact")}>
+          <Button
+            bg="black"
+            color="white"
+            onClick={() => navigate("/contact")} //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
             CONTACT
           </Button>
         </Stack>
