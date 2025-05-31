@@ -35,6 +35,7 @@ const UserLogin = () => {
             className="text-color-primary text-center"
             fontSize="2xl"
             fontWeight="bold"
+            fontStyle="italic"
             mb={8}
             mt={8}
           >

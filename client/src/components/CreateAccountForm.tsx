@@ -43,7 +43,6 @@ const CreateAccountForm: React.FC = () => {
           width="300px"
           padding="20px"
           borderRadius="8px"
-          borderWidth="2px"
           shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
         >
           <form onSubmit={handleSubmit}>

@@ -46,6 +46,7 @@ const Home: React.FC = () => {
           className="text-color-primary text-center"
           fontSize={["xl", "2xl", "3xl"]}
           fontWeight={"bold"}
+          my={4}
         >
           ABOUT US
         </Heading>
@@ -53,13 +54,18 @@ const Home: React.FC = () => {
         <Box className="absolute right-0 top-0 bottom-0 bg-red-500 w-[20px] md:w-[40px] lg:w-[60px]" />
         <Container className="max-w-7xl ">
           <Box className="text-left text-color-primary">
-            <Text fontWeight={"thin"} my={20}>
-              Step into Little Italy, your authentic neighborhood trattoria.
-              We're passionate about bringing the true flavors of Italy to your
-              table, using fresh, high-quality ingredients and time-honored
-              recipes passed down through generations. From classic pasta dishes
-              to wood-fired pizzas and delectable desserts, experience the
-              warmth and joy of Italian dining with us.
+            <Text fontWeight="thin" my={20} fontStyle="italic">
+              Step into Little Italy, your authentic neighborhood trattoria,
+              where every meal is a celebration. We're passionate about bringing
+              the true flavors of Italy to your table, using fresh, high-quality
+              ingredients and time-honored recipes passed down through
+              generations. From classic pasta dishes crafted with homemade
+              sauces to delicious, wood-fired pizzas baked to perfection and
+              handcrafted desserts, every bite is a journey to the heart of
+              Italian culinary tradition. Experience the warmth and joy of
+              Italian dining with us, where laughter fills the air, and friends
+              and family gather to create unforgettable memories. We look
+              forward to welcoming you to our little slice of Italy.
             </Text>
           </Box>
         </Container>
@@ -88,7 +94,6 @@ const Home: React.FC = () => {
                 m={8}
                 p={8}
                 borderRadius="8px"
-                borderWidth="2px"
                 bg="white"
                 shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
               >

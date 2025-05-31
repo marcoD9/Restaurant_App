@@ -76,8 +76,8 @@ const UserOrders: React.FC = () => {
 
   if (!ordersWithDetails || ordersWithDetails.length === 0) {
     return (
-      <Box className="center-col">
-        <Text className="text-color-primary" m={4}>
+      <Box className="center-col" mt={12}>
+        <Text className="text-color-primary" fontStyle="italic" m={8}>
           No orders found for this user.
         </Text>{" "}
       </Box>
@@ -88,10 +88,10 @@ const UserOrders: React.FC = () => {
     <Box
       className="center-col"
       mx="auto"
+      my={2}
       width={{ base: "90%", md: "70%", lg: "500px" }}
       padding="16px"
       borderRadius="8px"
-      borderWidth="2px"
       bg="white"
       shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
     >
@@ -145,9 +145,12 @@ const UserOrders: React.FC = () => {
                           alt={dishDetails.name}
                           className="w-12 h-12 object-cover rounded-md"
                         />
-                        <Text className="text-color-price">
+                        <Text className="text-color-primary">
                           {dishDetails.name} - Quantity: {item.quantity} -
-                          Price: ${dishDetails.price}
+                          <Text as="span" className="text-color-price">
+                            {" "}
+                            Price: ${dishDetails.price}{" "}
+                          </Text>
                         </Text>
                       </HStack>
                     ) : (

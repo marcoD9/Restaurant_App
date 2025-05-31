@@ -12,15 +12,7 @@ const Navigation = () => {
   };
 
   return (
-    <Box
-      w="full"
-      bg="white"
-      p={4}
-      position="sticky"
-      top={0}
-      zIndex={10}
-      borderWidth="2px"
-    >
+    <Box w="full" bg="white" p={4} position="sticky" top={0} zIndex={10}>
       <Flex justifyContent="space-between" alignItems="center">
         <Button
           onClick={() => navigate("/")}

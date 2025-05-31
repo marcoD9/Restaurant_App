@@ -9,7 +9,7 @@
 }
 
 .text-color-price {
-  color: var(--color-green-600);
+  color: var(--color-green-500);
   font-style: italic;
 }
 
