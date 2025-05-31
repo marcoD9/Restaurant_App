@@ -54,7 +54,16 @@ const LoginForm: React.FC<LoginFormProps> = () => {
               onChange={(e) => setPassword(e.target.value)}
             />
           </div>
-          <Button className="button" width="full" type="submit">
+          <Button
+            className="button"
+            width="full"
+            type="submit" //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
             Login
           </Button>
         </VStack>

@@ -19,6 +19,12 @@ const Contact: React.FC = () => {
             href="mailto:littleitaly@example.com"
             color="blue.500"
             fontWeight="medium"
+            //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
           >
             littleitaly@example.com
           </Link>

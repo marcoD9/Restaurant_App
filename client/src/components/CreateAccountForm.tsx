@@ -24,7 +24,15 @@ const CreateAccountForm: React.FC = () => {
     <>
       {!showForm ? (
         <Box>
-          <Button className="button" onClick={handleButtonClick}>
+          <Button
+            className="button"
+            onClick={handleButtonClick} //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
             {" "}
             Create Account
           </Button>
@@ -133,7 +141,16 @@ const CreateAccountForm: React.FC = () => {
                   onChange={(e) => setPhoneNumber(e.target.value)}
                 />
               </div>
-              <Button className="button" width="full" type="submit">
+              <Button
+                className="button"
+                width="full"
+                type="submit" //Style for hover
+                _hover={{
+                  transform: "scale(1.05)",
+                  cursor: "pointer",
+                }}
+                transition="all 0.2s ease-in-out"
+              >
                 Create Account
               </Button>
             </VStack>

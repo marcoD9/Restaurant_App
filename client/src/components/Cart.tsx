@@ -29,10 +29,26 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
         max={100}
         width="80px"
       />
-      <Button className="button" onClick={handleAddToCart}>
+      <Button
+        className="button"
+        onClick={handleAddToCart} //Style for hover
+        _hover={{
+          transform: "scale(1.05)",
+          cursor: "pointer",
+        }}
+        transition="all 0.2s ease-in-out"
+      >
         Add
       </Button>
-      <Button className="button" onClick={handleRemoveFromCart}>
+      <Button
+        className="button"
+        onClick={handleRemoveFromCart} //Style for hover
+        _hover={{
+          transform: "scale(1.05)",
+          cursor: "pointer",
+        }}
+        transition="all 0.2s ease-in-out"
+      >
         Remove Item
       </Button>
     </Box>

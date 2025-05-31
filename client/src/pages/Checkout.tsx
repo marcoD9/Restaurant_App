@@ -101,6 +101,12 @@ const Checkout: React.FC = () => {
                   className="button"
                   onClick={() => handleRemoveItem(dish.id)}
                   ml="auto"
+                  //Style for hover
+                  _hover={{
+                    transform: "scale(1.05)",
+                    cursor: "pointer",
+                  }}
+                  transition="all 0.2s ease-in-out"
                 >
                   Remove
                 </Button>
@@ -123,16 +129,41 @@ const Checkout: React.FC = () => {
         )}
         {dishDetails.length > 0 && (
           <Flex direction="column">
-            <Button className="button" onClick={handleCheckout}>
+            <Button
+              className="button"
+              onClick={handleCheckout} //Style for hover
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+              }}
+              transition="all 0.2s ease-in-out"
+            >
               Place Order
             </Button>
-            <Button className="button" onClick={handleClearCart} mt={4}>
+            <Button
+              className="button"
+              onClick={handleClearCart}
+              mt={4} //Style for hover
+              _hover={{
+                transform: "scale(1.05)",
+                cursor: "pointer",
+              }}
+              transition="all 0.2s ease-in-out"
+            >
               Clear Cart
             </Button>
           </Flex>
         )}
       </Box>
-      <Button className="button" onClick={() => navigate("/orders")}>
+      <Button
+        className="button"
+        onClick={() => navigate("/orders")} //Style for hover
+        _hover={{
+          transform: "scale(1.05)",
+          cursor: "pointer",
+        }}
+        transition="all 0.2s ease-in-out"
+      >
         Your Orders
       </Button>
     </Flex>

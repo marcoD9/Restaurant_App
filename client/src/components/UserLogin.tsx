@@ -40,7 +40,15 @@ const UserLogin = () => {
           >
             Welcome, {user.name}
           </Text>
-          <Button className="button" onClick={() => logout()}>
+          <Button
+            className="button"
+            onClick={() => logout()} //Style for hover
+            _hover={{
+              transform: "scale(1.05)",
+              cursor: "pointer",
+            }}
+            transition="all 0.2s ease-in-out"
+          >
             Logout
           </Button>
         </Box>

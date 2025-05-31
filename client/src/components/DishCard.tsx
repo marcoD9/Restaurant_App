@@ -11,9 +11,17 @@ function DishCard({ dish, showDescription = false }: DishCardProps) {
     <Box
       m={8}
       p={8}
-      className="bg-white center-col rounded-lg shadow-lg max-w-2xl"
+      className="bg-white center-col rounded-lg  max-w-2xl"
+      shadow="2px 2px 2px 1px rgba(0, 0, 0, 0.4)"
     >
-      <Image src={dish.image} alt={dish.name} />
+      <Image
+        src={dish.image}
+        alt={dish.name}
+        boxSize="300px"
+        objectFit="cover"
+        borderRadius="lg"
+        shadow="md" // Aggiunge un'ombra all'immagine
+      />
       <Stack mt="6">
         <Heading className="text-color-primary" fontSize="2xl">
           {dish.name}
