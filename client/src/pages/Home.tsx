@@ -4,7 +4,7 @@ import { Box, Heading, Flex, Container, Text } from "@chakra-ui/react";
 import DishCard from "../components/DishCard.tsx";
 import { Dish } from "../types";
 import { fetchDish } from "../api";
-import LittleItalyImage from "/src/img/LittleItaly.jpg";
+import LittleItalyImage from "/src/img/background.png";
 
 const Home: React.FC = () => {
   const [dishes, setDishes] = useState<Dish[]>([]);
@@ -32,7 +32,7 @@ const Home: React.FC = () => {
     <div>
       {/*Image and Name*/}
       <Flex
-        className="center-col bg-no-repeat bg-cover min-h-[80vh] text-center text-white"
+        className="bg-no-repeat bg-cover bg-center min-h-[80vh] text-center text-white relative overflow-hidden"
         mb={12}
         style={{ backgroundImage: `url(${LittleItalyImage})` }}
       ></Flex>
