@@ -9,6 +9,10 @@ import "dotenv/config";
 import errorHandler from "./middlewares/errorHandler.ts";
 import log from "./middlewares/logMiddleware.ts";
 
+import { PrismaClient } from "@prisma/client";
+
+const prisma = new PrismaClient();
+
 const app = express();
 app.use(cors());
 const port = process.env.PORT || 3000;
@@ -18,7 +22,7 @@ app.use(log);
 
 app.use("/login", loginRouter);
 app.use("/users", usersRouter);
-app.use("/dishes", dishesRouter);
+app.use("/dishes", dishesRouter(prisma));
 app.use("/orders", ordersRouter);
 app.use("/orderDishes", orderDishesRouter);
 
@@ -27,3 +31,9 @@ app.use(errorHandler);
 app.listen(port, () => {
   console.log(`App listening on port ${port}`);
 });
+
+if (process.env.NODE_ENV === "production") {
+  process.on("beforeExit", async () => {
+    await prisma.$disconnect();
+  });
+}
