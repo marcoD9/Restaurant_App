@@ -1,6 +1,7 @@
 import { Box, Button, Flex, Heading, Stack } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
+import { FaBars, FaTimes } from "react-icons/fa";
 
 const Navigation = () => {
   const navigate = useNavigate();
@@ -63,8 +64,8 @@ const Navigation = () => {
           }}
           transition="all 0.2s ease-in-out"
         >
-          {/* Renders "CLOSE" or "MENU" text based on the mobile menu's current state */}
-          {isMobileMenuOpen ? "CLOSE" : "MENU"}
+          {/* Renders the icon based on the mobile menu's current state */}
+          {isMobileMenuOpen ? <FaTimes /> : <FaBars />}
         </Button>
 
         {/* Nav links */}
