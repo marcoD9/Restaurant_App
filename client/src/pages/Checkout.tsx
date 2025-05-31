@@ -12,6 +12,7 @@ import {
   Image,
 } from "@chakra-ui/react";
 import { useNavigate } from "react-router-dom";
+import { FaTrash } from "react-icons/fa";
 
 const Checkout: React.FC = () => {
   const navigate = useNavigate();
@@ -79,7 +80,14 @@ const Checkout: React.FC = () => {
 
   return (
     <Flex className="center-col">
-      <Box p={4}>
+      <Box
+        p={4}
+        borderRadius="8px"
+        borderWidth="2px"
+        bg="white"
+        shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+        mt={12}
+      >
         <Heading
           fontSize="2xl"
           fontWeight="bold"
@@ -99,6 +107,8 @@ const Checkout: React.FC = () => {
                 </Text>
                 <Button
                   className="button"
+                  bg="black"
+                  color="white"
                   onClick={() => handleRemoveItem(dish.id)}
                   ml="auto"
                   //Style for hover
@@ -108,11 +118,11 @@ const Checkout: React.FC = () => {
                   }}
                   transition="all 0.2s ease-in-out"
                 >
-                  Remove
+                  <FaTrash />
                 </Button>
               </Flex>
             ))}
-            <Text className="text-color-primary" fontWeight={"bold"} m={2}>
+            <Text className="text-color-price" fontWeight={"bold"} m={2}>
               Total: {totalPrice}€
             </Text>
           </Stack>
@@ -131,7 +141,10 @@ const Checkout: React.FC = () => {
           <Flex direction="column">
             <Button
               className="button"
-              onClick={handleCheckout} //Style for hover
+              bg="black"
+              color="white"
+              onClick={handleCheckout}
+              //Style for hover
               _hover={{
                 transform: "scale(1.05)",
                 cursor: "pointer",
@@ -143,7 +156,10 @@ const Checkout: React.FC = () => {
             <Button
               className="button"
               onClick={handleClearCart}
-              mt={4} //Style for hover
+              mt={4}
+              bg="black"
+              color="white"
+              //Style for hover
               _hover={{
                 transform: "scale(1.05)",
                 cursor: "pointer",
@@ -157,7 +173,9 @@ const Checkout: React.FC = () => {
       </Box>
       <Button
         className="button"
-        onClick={() => navigate("/orders")} //Style for hover
+        onClick={() => navigate("/orders")}
+        mt={8}
+        //Style for hover
         _hover={{
           transform: "scale(1.05)",
           cursor: "pointer",

@@ -85,7 +85,16 @@ const UserOrders: React.FC = () => {
   }
 
   return (
-    <Box className="center-col">
+    <Box
+      className="center-col"
+      mx="auto"
+      width={{ base: "90%", md: "70%", lg: "500px" }}
+      padding="16px"
+      borderRadius="8px"
+      borderWidth="2px"
+      bg="white"
+      shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+    >
       <Heading className="text-color-primary" m={4} fontWeight={"bold"}>
         Your Orders
       </Heading>
@@ -112,7 +121,9 @@ const UserOrders: React.FC = () => {
               <Text fontWeight="bold" as="span">
                 Total Price:
               </Text>{" "}
-              ${order.totalPrice}
+              <Text as="span" className="text-color-price">
+                ${order.totalPrice}
+              </Text>
             </Text>
             <Text>
               <Text fontWeight="bold" as="span">
@@ -134,7 +145,7 @@ const UserOrders: React.FC = () => {
                           alt={dishDetails.name}
                           className="w-12 h-12 object-cover rounded-md"
                         />
-                        <Text>
+                        <Text className="text-color-price">
                           {dishDetails.name} - Quantity: {item.quantity} -
                           Price: ${dishDetails.price}
                         </Text>

@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import { useCart } from "../contexts/CartContext";
 import { Box, Button, Input } from "@chakra-ui/react";
+import { FaPlus, FaTrash } from "react-icons/fa";
 
 interface CartProps {
   dishId: string;
@@ -31,6 +32,8 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
       />
       <Button
         className="button"
+        bg="black"
+        color="white"
         onClick={handleAddToCart} //Style for hover
         _hover={{
           transform: "scale(1.05)",
@@ -38,10 +41,12 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
         }}
         transition="all 0.2s ease-in-out"
       >
-        Add
+        <FaPlus />
       </Button>
       <Button
         className="button"
+        bg="black"
+        color="white"
         onClick={handleRemoveFromCart} //Style for hover
         _hover={{
           transform: "scale(1.05)",
@@ -49,7 +54,7 @@ const Cart: React.FC<CartProps> = ({ dishId }) => {
         }}
         transition="all 0.2s ease-in-out"
       >
-        Remove Item
+        <FaTrash />
       </Button>
     </Box>
   );

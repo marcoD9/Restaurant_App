@@ -84,7 +84,13 @@ const Home: React.FC = () => {
             <Link key={dish.id} to={`/dishes/${dish.id}`}>
               <Box
                 key={dish.id}
-                className="hover:scale-103 transition-transform duration-200 ease-in-out"
+                className="bg-white center-col rounded-lg max-w-2xl hover:scale-103 transition-transform duration-200 ease-in-out"
+                m={8}
+                p={8}
+                borderRadius="8px"
+                borderWidth="2px"
+                bg="white"
+                shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
               >
                 <DishCard dish={dish} />
               </Box>

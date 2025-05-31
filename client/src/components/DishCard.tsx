@@ -8,12 +8,7 @@ interface DishCardProps {
 
 function DishCard({ dish, showDescription = false }: DishCardProps) {
   return (
-    <Box
-      m={8}
-      p={8}
-      className="bg-white center-col rounded-lg  max-w-2xl"
-      shadow="2px 2px 2px 1px rgba(0, 0, 0, 0.4)"
-    >
+    <Box className="center-col rounded-lg max-w-2xl">
       <Image
         src={dish.image}
         alt={dish.name}
@@ -32,7 +27,7 @@ function DishCard({ dish, showDescription = false }: DishCardProps) {
           </Text>
         ) : null}{" "}
         {/*Render description only if the prop is true*/}
-        <Text className="text-color-primary" fontSize="lg">
+        <Text className="text-color-price" fontSize="lg">
           {dish.price}€
         </Text>
       </Stack>

@@ -41,7 +41,14 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
     <div>
       {/*Dish*/}
       <Box className="center-col" gap={4}>
-        <Flex className="center-col">
+        <Flex
+          className="bg-white center-col"
+          borderRadius="8px"
+          borderWidth="2px"
+          shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+          mt={12}
+          p={4}
+        >
           <DishCard key={dish.id} dish={dish} showDescription={true} />
           <Cart dishId={dish.id} />
         </Flex>
