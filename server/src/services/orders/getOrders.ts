@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const getOrders = async () => {
-  const prisma = new PrismaClient();
-
+const getOrders = async (prisma: PrismaClient) => {
   const orders = await prisma.order.findMany({});
 
   return orders;

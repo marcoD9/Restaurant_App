@@ -1,7 +1,10 @@
 import { PrismaClient } from "@prisma/client";
 
-const deleteOrderDishesById = async (orderId: string, dishId: string) => {
-  const prisma = new PrismaClient();
+const deleteOrderDishesById = async (
+  prisma: PrismaClient,
+  orderId: string,
+  dishId: string
+) => {
   // Check if Order and Dish exist
   const orderExists = await prisma.order.findUnique({ where: { id: orderId } });
   const dishExists = await prisma.dish.findUnique({ where: { id: dishId } });

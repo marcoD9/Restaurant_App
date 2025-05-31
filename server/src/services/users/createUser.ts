@@ -1,6 +1,7 @@
 import { PrismaClient } from "@prisma/client";
 
 const createUser = async (
+  prisma: PrismaClient, // Accept the PrismaClient instance as an argument
   username: string,
   password: string,
   name: string,
@@ -15,7 +16,7 @@ const createUser = async (
     phoneNumber,
   };
 
-  const prisma = new PrismaClient();
+  // Use the provided 'prisma' instance to perform the database operation
   const user = await prisma.user.create({
     data: newUser,
   });

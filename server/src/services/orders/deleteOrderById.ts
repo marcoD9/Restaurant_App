@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const deleteOrderById = async (id: string) => {
-  const prisma = new PrismaClient();
-
+const deleteOrderById = async (prisma: PrismaClient, id: string) => {
   const order = await prisma.order.deleteMany({
     where: { id },
   });

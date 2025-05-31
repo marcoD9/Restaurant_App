@@ -1,12 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
 const createOrderDishes = async (
+  prisma: PrismaClient,
   orderId: string,
   dishId: string,
   quantity: number
 ) => {
-  const prisma = new PrismaClient();
-
   // Verify the order exists
   const order = await prisma.order.findUnique({
     where: { id: orderId },

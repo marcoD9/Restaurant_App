@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const getOrdersDishes = async () => {
-  const prisma = new PrismaClient();
-
+const getOrdersDishes = async (prisma: PrismaClient) => {
   const ordersDish = await prisma.orderDish.findMany({
     include: {
       order: true,

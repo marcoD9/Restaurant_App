@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const getOrdersByUserId = async (userId: string) => {
-  const prisma = new PrismaClient();
-
+const getOrdersByUserId = async (prisma: PrismaClient, userId: string) => {
   // Check if the user exists
   const userExists = await prisma.user.findUnique({
     where: {

@@ -1,11 +1,11 @@
 import { PrismaClient } from "@prisma/client";
 
 const updateOrderDishesById = async (
+  prisma: PrismaClient,
   orderId: string,
   dishId: string,
   quantity: number
 ) => {
-  const prisma = new PrismaClient();
   // Update the OrderDish quantity
   // Check if Order and Dish exist
   const orderExists = await prisma.order.findUnique({ where: { id: orderId } });

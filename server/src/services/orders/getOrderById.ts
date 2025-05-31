@@ -1,8 +1,6 @@
 import { PrismaClient } from "@prisma/client";
 
-const getOrderById = async (id: string) => {
-  const prisma = new PrismaClient();
-
+const getOrderById = async (prisma: PrismaClient, id: string) => {
   const order = await prisma.order.findUnique({
     where: { id },
   });

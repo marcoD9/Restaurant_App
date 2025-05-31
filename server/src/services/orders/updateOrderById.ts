@@ -6,11 +6,10 @@ interface OrderDishInput {
 }
 
 const updateOrderById = async (
+  prisma: PrismaClient,
   id: string,
   updatedOrder: Prisma.OrderUpdateInput & { orderDishes?: OrderDishInput[] }
 ) => {
-  const prisma = new PrismaClient();
-
   // Check if the order exists
   const existingOrder = await prisma.order.findUnique({
     where: { id },

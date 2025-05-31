@@ -20,11 +20,11 @@ const port = process.env.PORT || 3000;
 app.use(express.json());
 app.use(log);
 
-app.use("/login", loginRouter);
-app.use("/users", usersRouter);
+app.use("/login", loginRouter(prisma));
+app.use("/users", usersRouter(prisma));
 app.use("/dishes", dishesRouter(prisma));
-app.use("/orders", ordersRouter);
-app.use("/orderDishes", orderDishesRouter);
+app.use("/orders", ordersRouter(prisma));
+app.use("/orderDishes", orderDishesRouter(prisma));
 
 app.use(errorHandler);
 

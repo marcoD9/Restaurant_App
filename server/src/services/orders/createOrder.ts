@@ -6,12 +6,12 @@ interface OrderDishInput {
 }
 
 const createOrder = async (
+  prisma: PrismaClient,
   time: string,
   orderStatus: string,
   userId: string,
   orderDishes: OrderDishInput[] // Array of OrderDishInput objects
 ) => {
-  const prisma = new PrismaClient();
   let totalPrice = 0;
 
   // Calculate total price by iterating through orderDishes

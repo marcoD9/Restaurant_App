@@ -8,7 +8,6 @@ import deleteDishById from "../services/dishes/deleteDishById.ts";
 import authMiddleware from "../middlewares/auth.ts";
 import { PrismaClient } from "@prisma/client";
 
-// Esporta una funzione che prende l'istanza di PrismaClient
 export default (prisma: PrismaClient) => {
   const router = Router();
 
@@ -101,12 +100,10 @@ export default (prisma: PrismaClient) => {
         const { id } = req.params;
         const dish = await deleteDishById(prisma, id);
         if (dish) {
-          res
-            .status(200)
-            .send({
-              message: `Dish with id ${id} successfully deleted!`,
-              dish,
-            });
+          res.status(200).send({
+            message: `Dish with id ${id} successfully deleted!`,
+            dish,
+          });
         } else {
           res.status(404).json({ message: `Dish with id ${id} not found` });
         }
