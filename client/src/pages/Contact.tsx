@@ -3,7 +3,17 @@ import { MdEmail, MdPhone } from "react-icons/md";
 
 const Contact: React.FC = () => {
   return (
-    <VStack className="center-col" minH="60vh" mt={8} px={4}>
+    <VStack
+      className="center-col "
+      minH="60vh"
+      mt={8}
+      px={4}
+      bg="white"
+      w="80vw"
+      mx="auto"
+      borderRadius="lg"
+      shadow="md"
+    >
       <Text
         fontSize="3xl"
         fontWeight="bold"
