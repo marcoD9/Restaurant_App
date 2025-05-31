@@ -90,10 +90,6 @@ const UserOrders: React.FC = () => {
       mx="auto"
       my={2}
       width={{ base: "90%", md: "70%", lg: "500px" }}
-      padding="16px"
-      borderRadius="8px"
-      bg="white"
-      shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
     >
       <Heading className="text-color-primary" m={4} fontWeight={"bold"}>
         Your Orders
@@ -102,8 +98,12 @@ const UserOrders: React.FC = () => {
         {ordersWithDetails.map((order) => (
           <Box
             key={order.id}
-            className="border border-gray-200 rounded-lg text-color-primary"
+            className="rounded-lg text-color-primary"
             p={4}
+            padding="16px"
+            borderRadius="8px"
+            bg="white"
+            shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
           >
             <Text>
               <Text fontWeight="bold" as="span">
