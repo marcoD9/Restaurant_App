@@ -11,7 +11,15 @@ const Navigation = () => {
   };
 
   return (
-    <Box w="full" bg="white" p={4} position="sticky" top={0} zIndex={10}>
+    <Box
+      w="full"
+      bg="white"
+      p={4}
+      position="sticky"
+      top={0}
+      zIndex={10}
+      borderWidth="2px"
+    >
       <Flex justifyContent="space-between" alignItems="center">
         <Button
           onClick={() => navigate("/")}
@@ -20,6 +28,13 @@ const Navigation = () => {
               "linear-gradient(to right, green 33%, white 33% 66%, red 66%)",
             padding: "8px",
           }}
+          shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+          //Style for hover
+          _hover={{
+            transform: "scale(1.05)",
+            cursor: "pointer",
+          }}
+          transition="all 0.2s ease-in-out"
         >
           <Box padding={{ base: 2, md: 8 }}>
             <Heading
