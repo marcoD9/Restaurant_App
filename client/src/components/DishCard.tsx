@@ -20,7 +20,7 @@ function DishCard({ dish, showDescription = false }: DishCardProps) {
         boxSize="300px"
         objectFit="cover"
         borderRadius="lg"
-        shadow="md" // Aggiunge un'ombra all'immagine
+        shadow="md"
       />
       <Stack mt="6">
         <Heading className="text-color-primary" fontSize="2xl">
