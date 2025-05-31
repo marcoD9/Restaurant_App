@@ -19,7 +19,15 @@ const LoginForm: React.FC<LoginFormProps> = () => {
   };
 
   return (
-    <Box className="center-col" width="300px" padding="20px" borderRadius="8px">
+    <Box
+      className="center-col"
+      width="300px"
+      padding="20px"
+      borderRadius="8px"
+      borderWidth="2px"
+      bg="white"
+      shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+    >
       <form onSubmit={handleSubmit}>
         <VStack>
           <div>
@@ -57,6 +65,8 @@ const LoginForm: React.FC<LoginFormProps> = () => {
           <Button
             className="button"
             width="full"
+            bg="black"
+            color="white"
             type="submit" //Style for hover
             _hover={{
               transform: "scale(1.05)",

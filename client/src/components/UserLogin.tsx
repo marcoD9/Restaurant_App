@@ -38,7 +38,7 @@ const UserLogin = () => {
             mb={8}
             mt={8}
           >
-            Welcome, {user.name}
+            Welcome, {user.name}!
           </Text>
           <Button
             className="button"

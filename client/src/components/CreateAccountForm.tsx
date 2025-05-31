@@ -38,7 +38,14 @@ const CreateAccountForm: React.FC = () => {
           </Button>
         </Box>
       ) : (
-        <Box width="300px" padding="20px" borderRadius="8px">
+        <Box
+          bg="white"
+          width="300px"
+          padding="20px"
+          borderRadius="8px"
+          borderWidth="2px"
+          shadow="4px 4px 2px 1px rgba(0, 0, 0, 0.4)"
+        >
           <form onSubmit={handleSubmit}>
             <VStack>
               <div>
@@ -143,6 +150,8 @@ const CreateAccountForm: React.FC = () => {
               </div>
               <Button
                 className="button"
+                bg="black"
+                color="white"
                 width="full"
                 type="submit" //Style for hover
                 _hover={{
