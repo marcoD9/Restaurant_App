@@ -99,6 +99,7 @@ const UserOrders: React.FC = () => {
           <Box
             key={order.id}
             className="rounded-lg text-color-primary"
+            textAlign="start"
             p={4}
             padding="16px"
             borderRadius="8px"
@@ -139,7 +140,12 @@ const UserOrders: React.FC = () => {
                   {order.orderDishes.map((item) => {
                     const dishDetails = order.dishesDetails[item.dishId];
                     return dishDetails ? (
-                      <HStack key={item.dishId}>
+                      <HStack
+                        key={item.dishId}
+                        alignItems="center" // Vertically centers content within each dish row
+                        justifyContent="flex-start" // Horizontally aligns content to the left within each dish row
+                        width="full"
+                      >
                         <Image
                           src={dishDetails.image}
                           alt={dishDetails.name}
