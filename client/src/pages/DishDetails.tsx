@@ -40,7 +40,7 @@ const DishDetails: React.FC<DishDetailsProps> = () => {
   return (
     <div>
       {/*Dish*/}
-      <Box className="center-col" gap={4}>
+      <Box className="center-col" gap={4} margin={4}>
         <Flex
           className="bg-white center-col"
           borderRadius="8px"
